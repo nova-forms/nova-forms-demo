@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+	--base: #454545;
+	--primary: #dc9e26;
+	--secondary: #062544;
+	--danger: #c2185b;
+	--warning: #dc9e26;
+	--success: #3dcc79;
+	--gray: #7e7e7e;
+	--lightgray: #e7e7e7;
+	--light: #fff;
+	--dark: #000;
+
+	--margin: 2cm;
+}
+
+body {
+	font-family: "Montserrat", sans-serif;
+	background: var(--secondary);
+	margin: 0;
+}
+
+header, nav, footer {
+	background: var(--secondary);
+	color: var(--primary);
+}
+
+nav {
+	position: sticky;
+	top: 0;
+}
+
+footer {
+	padding: 16px;
+	text-align: center;
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 16px;
+	position: sticky;
+	top: 0;
+}
+
+#logo {
+	height: 48px;
+	margin-right: 16px;
+}
+
+#name {
+	text-align: right;
+}
+
+#title {
+	font-weight: bold;
+	font-size: 24px;
+}
+
+/* Fieldset styles */
+fieldset {
+	border: 1px solid var(--dark);
+	margin-top: 1em;
+	margin-bottom: 1em;
+	page-break-inside: avoid;
+}
+
+legend {
+	color: var(--dark);
+}
+
+/* Button styles */
+input[type=submit], input[type=button], button, .button {
+	border: none;
+	background-color: var(--primary);
+	padding: 8px;
+	color: var(--light);
+	margin-top: 4px;
+	margin-bottom: 4px;
+	border-radius: 16px;
+	cursor: pointer;
+	box-shadow: 0 -2px 0 rgba(0, 0, 0, 0.2) inset;
+	font-size: 12px;
+}
+
+input[type=submit]:hover, input[type=button]:hover, button:hover, .button:hover {
+	box-shadow: 0 0 0;
+}
+
+input[type=submit] + input[type=submit], input[type=button] + input[type=button], button + button, .button + .button {
+	margin-left: 8px;
+}
+
+/* Other input styles */
+input[type=number], input[type=text] {
+	padding-top: 4px;
+	width: 100%;
+	box-sizing: border-box;
+	border: none;
+	border-bottom: 1px solid var(--lightgray);
+	font-family: "Caveat", cursive;
+	font-size: 20px;
+}
+
+input[type=file] {
+	display: none;
+}
+
+/* Multicolumn styles */
+.cols-2 {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 1cm;
+	grid-row-gap: 1em;
+}
+
+/* Error messages */
+.error {
+	color: var(--danger);
+}
+
+/* Dialog styles */
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-items: center;
+	align-items: center;
+	background: rgba(0, 0, 0, 0.2);
+	backdrop-filter: blur(8px);
+}
+
+.modal dialog {
+	border: none;
+	margin: auto;
+	position: static;
+	padding: 0;
+}
+
+.modal .modal-header {
+	font-weight: bold;
+	color: black;
+	background: none;
+	padding: 16px;
+}
+
+.modal .modal-main {
+	background: white;
+	padding: 16px;
+}
+
+.modal .modal-footer {
+	background: white;
+	padding: 16px;
+}
+
+.modal dialog.success {
+	background: var(--success);
+}
+
+/* Printing page settings */
+@page {
+	size: A4;
+	background: white;
+	margin: var(--margin);
+
+	@bottom-left {
+		content: "Nova Forms";
+	}
+
+	@bottom-right {
+		content: "Page " counter(page) "/" counter(pages);
+	}
+}
+
+/* Only applied on the web */
+@media screen {
+	main {
+		background: var(--lightgray);
+		padding-top: 2cm;
+		padding-bottom: 2cm;
+	}
+
+	form {
+		box-sizing: border-box;
+		max-width: 210mm;
+		min-height: 297mm;
+		margin: auto;
+		padding: var(--margin);
+		background: var(--light);
+	}
+
+	.only-print {
+		display: none !important;
+	}
+
+	/* Responsive design for mobile (smaller than A4 size) */
+	@media screen and (max-width: 210mm) {
+		main {
+			padding: 0;
+		}
+
+		form {
+			padding: 32px;
+			min-height: auto;
+		}
+
+		.cols-2 {
+			grid-template-columns: 1fr;
+		}
+	}
+}
+
+/* Applied while printing */
+@media print {
+	header, nav, footer {
+		display: none;
+	}
+
+	form {
+		margin: 0;
+	}
+
+	input[type=submit], input[type=button], button {
+		display: none;
+	}
+
+	input[type=number], input[type=text] {
+		border: none;
+		padding: 0;
+		margin: 0;
+		font-size: 20px;
+	}
+	
+	.no-print {
+		display: none !important;
+	}
+
+	.error {
+		display: none;
+	}
+}
