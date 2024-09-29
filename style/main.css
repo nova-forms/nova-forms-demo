@@ -21,14 +21,9 @@ body {
 	margin: 0;
 }
 
-header, nav, footer {
+header, footer {
 	background: var(--secondary);
 	color: var(--primary);
-}
-
-nav {
-	position: sticky;
-	top: 0;
 }
 
 footer {
@@ -83,6 +78,8 @@ input[type=submit], input[type=button], button, .button {
 	cursor: pointer;
 	box-shadow: 0 -2px 0 rgba(0, 0, 0, 0.2) inset;
 	font-size: 12px;
+	display: inline-block;
+	box-sizing: border-box;
 }
 
 input[type=submit]:hover, input[type=button]:hover, button:hover, .button:hover {
@@ -91,6 +88,12 @@ input[type=submit]:hover, input[type=button]:hover, button:hover, .button:hover 
 
 input[type=submit] + input[type=submit], input[type=button] + input[type=button], button + button, .button + .button {
 	margin-left: 8px;
+}
+
+.icon-button {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
 }
 
 /* Other input styles */
@@ -102,10 +105,6 @@ input[type=number], input[type=text] {
 	border-bottom: 1px solid var(--lightgray);
 	font-family: "Caveat", cursive;
 	font-size: 20px;
-}
-
-input[type=file] {
-	display: none;
 }
 
 /* Multicolumn styles */
@@ -144,23 +143,32 @@ input[type=file] {
 
 .modal .modal-header {
 	font-weight: bold;
-	color: black;
+	color: var(--dark);
 	background: none;
 	padding: 16px;
 }
 
 .modal .modal-main {
-	background: white;
+	background: var(--light);
 	padding: 16px;
 }
 
 .modal .modal-footer {
-	background: white;
+	background: var(--light);
 	padding: 16px;
 }
 
 .modal dialog.success {
 	background: var(--success);
+}
+
+/* Accessible screen reader hiding for inputs */
+
+.sr-hidden {
+	position: absolute !important;
+	width: 0 !important;
+	height: 0 !important;
+	overflow: hidden !important;
 }
 
 /* Printing page settings */
@@ -186,13 +194,35 @@ input[type=file] {
 		padding-bottom: 2cm;
 	}
 
-	form {
+	form, #preview {
 		box-sizing: border-box;
+		width: 100%;
 		max-width: 210mm;
 		min-height: 297mm;
 		margin: auto;
-		padding: var(--margin);
+		border: none;
+		display: block;
+	}
+
+	form {
 		background: var(--light);
+		padding: var(--margin);
+	}
+
+	.hidden {
+		display: none !important;
+	}
+
+	#nova-form-actions {
+		position: sticky;
+		bottom: 0;
+		left: calc((100% - 210mm) / 2);
+		max-width: 210mm;
+		display: block;
+		text-align: right;
+		box-sizing: border-box;
+		padding: 16px;
+		height: 80px;
 	}
 
 	.only-print {
@@ -213,11 +243,19 @@ input[type=file] {
 		.cols-2 {
 			grid-template-columns: 1fr;
 		}
+
+		#nova-form-actions {
+			margin-top: -80px;
+		}
 	}
 }
 
 /* Applied while printing */
 @media print {
+	#preview {
+		display: none;
+	}
+	
 	header, nav, footer {
 		display: none;
 	}
@@ -235,6 +273,16 @@ input[type=file] {
 		padding: 0;
 		margin: 0;
 		font-size: 20px;
+		color: var(--dark);
+	}
+
+	input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	input[type=number] {
+		-moz-appearance: textfield;
 	}
 	
 	.no-print {

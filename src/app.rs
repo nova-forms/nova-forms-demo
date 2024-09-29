@@ -2,6 +2,7 @@ pub use nova_forms::*;
 
 use leptos::*;
 use leptos_meta::*;
+use leptos_router::*;
 use serde::{Deserialize, Serialize};
 
 // Define the form data structure.
@@ -28,9 +29,12 @@ pub fn App() -> impl IntoView {
     provide_meta_context();
 
     view! {
-        <FormContainer title="Nova Forms" subtitle="Demo Form" logo="/logo.png">
-            <DemoForm/>
-        </FormContainer>
+        <Router>
+            <FormContainer title="Nova Forms" subtitle="Demo Form" logo="/logo.png">
+                <DemoForm/>
+            </FormContainer>
+        </Router>
+
     }
 }
 
@@ -50,7 +54,7 @@ fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
 
         // Defines how to render the form itself.
         <NovaForm form_data=form_data on_submit=submit bind="form_data">
-
+            
             <h1>"Demo Form"</h1>
             <p>"Welcome to the Nova Forms demo. In this demo, we show you how easy it is to use Nova Forms compared to other alternatives. Sit back and enjoy!"</p>
 
@@ -81,26 +85,20 @@ fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
                 }
             }>
             </Repeatable>
-
+        
             <div class="no-print">
                 <h2 class="no-print">"Uploading Files"</h2>
                 <p>"Support for file upload can be easily added by inserting the respective component. The server side handling is generated automatically."</p>
                 <p>"Also note that this part of the worm won't be rendered in the output PDF. On the other hand, the output PDF can contain sections that are not shown here."</p>
-                <FileUpload bind="files" label="Select File"/>
+                <FileUpload bind="files"/>
             </div>
-
+        
             <div class="no-print">
                 <h2 class="no-print">"The Grand Finale"</h2>
-                <p class="no-print">"Please click the submit button below to generate a PDF of the form you just filled out."</p>
-                <input type="submit" value="Submit"/>
+                <p class="no-print">"Please check the preview of your form by clicking the preview button on the bottom right."</p>
+                <p class="no-print">"After you have confirmed that everything looks alright, you can click submit button send the data to the server and generate the final PDF."</p>
             </div>
-
-            /*
-            <Modal kind=ModalKind::Success title="Form Submission Successful">
-                "The form submission was sucessful"
-            </Modal>
-            */
-
+                
 
             <h2 class="only-print">"Signatures"</h2>
         </NovaForm>

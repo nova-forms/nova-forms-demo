@@ -1170,6 +1170,7 @@ name = "nova-forms"
 version = "0.1.0"
 dependencies = [
  "futures",
+ "js-sys",
  "leptos",
  "leptos_meta",
  "leptos_router",
