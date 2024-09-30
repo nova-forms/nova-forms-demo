@@ -2,13 +2,13 @@ pub use nova_forms::*;
 
 use leptos::*;
 use leptos_meta::*;
-use leptos_router::*;
 use serde::{Deserialize, Serialize};
 
 // Define the form data structure.
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 struct DemoForm {
     me: PersonData,
+    address: Address,
     #[serde(default)]
     children: Vec<PersonData>,
     #[serde(default)]
@@ -29,12 +29,9 @@ pub fn App() -> impl IntoView {
     provide_meta_context();
 
     view! {
-        <Router>
-            <FormContainer title="Nova Forms" subtitle="Demo Form" logo="/logo.png">
-                <DemoForm/>
-            </FormContainer>
-        </Router>
-
+        <FormContainer title="Nova Forms" subtitle="Demo Form" logo="/logo.png">
+            <DemoForm/>
+        </FormContainer>
     }
 }
 
@@ -42,7 +39,8 @@ pub fn App() -> impl IntoView {
 #[component]
 fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
     // Define the submit server action.
-    let submit: Action<OnSubmit, Result<(), ServerFnError>> = Action::<OnSubmit, _>::server();
+    //let submit: Action<OnSubmit, Result<(), ServerFnError>> = Action::<OnSubmit, _>::server();
+    let submit = create_server_action::<OnSubmit>();
 
     view! {
         // Injects a stylesheet into the document <head>.
@@ -69,6 +67,8 @@ fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
                     <Input<u32> label="Age" bind="age"/>
                 </fieldset>
             </Group>
+
+            <Address bind="address"/>
 
             // Repeatable section for children of the client.
             <h2>"Your Children"</h2>
