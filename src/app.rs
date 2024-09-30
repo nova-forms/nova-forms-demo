@@ -64,8 +64,8 @@ fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
             <Group bind="me">
                 <fieldset class="cols-2">
                     <legend>{format!("About Yourself")}</legend>
-                    <Input label="First Name" bind="first_name" placeholder=NonEmptyString::from("Max") />
-                    <Input label="Last Name" bind="last_name" placeholder=NonEmptyString::from("Muster") />
+                    <Input<NonEmptyString> label="First Name" bind="first_name" placeholder="Max" />
+                    <Input<NonEmptyString> label="Last Name" bind="last_name" placeholder="Muster" />
                     <Input<u32> label="Age" bind="age"/>
                 </fieldset>
             </Group>
@@ -78,8 +78,8 @@ fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
                 view! {
                     <fieldset class="cols-2">
                         <legend>{format!("Child {}", idx + 1)}</legend>
-                        <Input label="First Name" bind="first_name" placeholder=NonEmptyString::from("Max") />
-                        <Input label="Last Name" bind="last_name" placeholder=NonEmptyString::from("Muster") />
+                        <Input<NonEmptyString> label="First Name" bind="first_name" placeholder="Max" />
+                        <Input<NonEmptyString> label="Last Name" bind="last_name" placeholder="Muster" />
                         <Input<u32> label="Age" bind="age"/>
                     </fieldset>
                 }

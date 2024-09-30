@@ -116,7 +116,7 @@ input[type=number], input[type=text] {
 }
 
 /* Error messages */
-.error {
+span.error {
 	color: var(--danger);
 }
 
@@ -158,8 +158,20 @@ input[type=number], input[type=text] {
 	padding: 16px;
 }
 
+.modal dialog.info {
+	background: var(--primary);
+}
+
 .modal dialog.success {
 	background: var(--success);
+}
+
+.modal dialog.warn {
+	background: var(--warning);
+}
+
+.modal dialog.error {
+	background: var(--danger);
 }
 
 /* Accessible screen reader hiding for inputs */
@@ -289,7 +301,7 @@ input[type=number], input[type=text] {
 		display: none !important;
 	}
 
-	.error {
+	span.error {
 		display: none;
 	}
 }
