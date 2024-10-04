@@ -23,9 +23,15 @@ http = "1"
 serde = { version = "1.0", features = ["derive"] }
 uuid  = { features = ["v4", "serde"], version = "1" }
 nova-forms = { path = "../nova-forms" }
+leptos_i18n = "0.4"
 
 [features]
-hydrate = ["leptos/hydrate", "leptos_meta/hydrate", "leptos_router/hydrate"]
+hydrate = [
+    "leptos/hydrate",
+    "leptos_meta/hydrate",
+    "leptos_router/hydrate",
+    "leptos_i18n/hydrate",
+]
 ssr = [
     "dep:axum",
     "dep:tokio",
@@ -37,6 +43,7 @@ ssr = [
     "leptos_router/ssr",
     "dep:tracing",
     "nova-forms/ssr",
+    "leptos_i18n/axum",
 ]
 
 # Defines a size-optimized profile for the WASM bundle in release mode
@@ -108,3 +115,7 @@ lib-default-features = false
 #
 # Optional. Defaults to "release".
 lib-profile-release = "wasm-release"
+
+[package.metadata.leptos-i18n]
+default = "en"
+locales = ["en", "de"]

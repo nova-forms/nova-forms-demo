@@ -1,0 +1,10 @@
+{
+  "nova_forms": "Nova Forms",
+  "demo_form": "Demoformular",
+  "welcome_message": "Willkommen zum Nova Forms Demoformular. In dieser Demo zeigen wir dir, wie einfach es ist, Nova Forms zu verwenden im Vergleich zu anderen Alternativen. Viel Spass!",
+  "about_yourself": "Über dich selbst",
+  "about_yourself_message": "Bitte füllen Sie das untenstehende Formular mit Ihren persönlichen Daten aus.",
+  "age": "Ater",
+  "first_name": "Vorname",
+  "last_name": "Nachname"
+}
