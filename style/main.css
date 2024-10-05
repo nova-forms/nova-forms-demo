@@ -219,7 +219,7 @@ span.error {
 	}
 
 	@bottom-right {
-		content: "Page " counter(page) "/" counter(pages);
+		content: counter(page) "/" counter(pages);
 	}
 }
 
@@ -239,6 +239,10 @@ span.error {
 		margin: auto;
 		border: none;
 		display: block;
+	}
+
+	#preview {
+		overflow-x: hidden;
 	}
 
 	form {
