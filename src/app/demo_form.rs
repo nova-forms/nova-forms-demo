@@ -1,10 +1,10 @@
 pub use nova_forms::*;
 
+use crate::app::use_i18n;
 use leptos::*;
+use leptos_i18n::*;
 use leptos_meta::*;
 use serde::{Deserialize, Serialize};
-use crate::app::use_i18n;
-use leptos_i18n::*;
 
 // Define the form data structure.
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -42,64 +42,63 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
         <Title text=t!(i18n, demo_form)/>
 
         // Defines how to render the form itself.
-        <NovaForm form_data=form_data on_submit=submit bind="form_data">
-            <Pages>
-                <Page id="first-page" label="Page 1">
-                    <h1>{t!(i18n, demo_form)}</h1>
-                    <p>{t!(i18n, welcome_message)}</p>
-        
-                    // Section about the client.
-                    <h2>{t!(i18n, about_yourself)}</h2>
-                    <p>{t!(i18n, about_yourself_message)}</p>
-                    <Group bind="me">
+        <NovaForm form_data=form_data on_submit=submit bind="form_data" i18n=i18n>
+
+            <Page id="first-page" label={t!(i18n, about_yourself)}>
+                <h1>{t!(i18n, demo_form)}</h1>
+                <p>{t!(i18n, welcome_message)}</p>
+
+                // Section about the client.
+                <h2>{t!(i18n, about_yourself)}</h2>
+                <p>{t!(i18n, about_yourself_message)}</p>
+                <Group bind="me">
+                    <fieldset class="cols-2">
+                        <legend>{t!(i18n, about_yourself)}</legend>
+                        <Input<NonEmptyString> label=t!(i18n, first_name) bind="first_name" placeholder="Max" />
+                        <Input<NonEmptyString> label=t!(i18n, last_name) bind="last_name" placeholder="Muster" />
+                        <Input<u32> label=t!(i18n, age)bind="age"/>
+                    </fieldset>
+                </Group>
+
+                <Address bind="address"/>
+            </Page>
+
+            <Page id="second-page" label={t!(i18n, your_children)}>
+
+                // Repeatable section for children of the client.
+                <h2>{t!(i18n, your_children)}</h2>
+                <p>"Add the personal information of your children here. You can easily add and remove children with the respective buttons."</p>
+                <p>"This demonstrates the ability to dynamically add and remove components, or have repeatable components"</p>
+                <Repeatable bind="children" item = |idx| {
+                    let i18n = use_i18n();
+
+                    view! {
                         <fieldset class="cols-2">
-                            <legend>{t!(i18n, about_yourself)}</legend>
+                            <legend>{format!("Child {}", idx + 1)}</legend>
                             <Input<NonEmptyString> label=t!(i18n, first_name) bind="first_name" placeholder="Max" />
                             <Input<NonEmptyString> label=t!(i18n, last_name) bind="last_name" placeholder="Muster" />
                             <Input<u32> label=t!(i18n, age)bind="age"/>
                         </fieldset>
-                    </Group>
-        
-                    <Address bind="address"/>
-                </Page>
-                <Page id="second-page" label="Page 2">
+                    }
+                }>
+                </Repeatable>
 
-                    // Repeatable section for children of the client.
-                    <h2>"Your Children"</h2>
-                    <p>"Add the personal information of your children here. You can easily add and remove children with the respective buttons."</p>
-                    <p>"This demonstrates the ability to dynamically add and remove components, or have repeatable components"</p>
-                    <Repeatable bind="children" item = |idx| {
-                        let i18n = use_i18n();
+                <div class="no-print">
+                    <h2 class="no-print">"Uploading Files"</h2>
+                    <p>"Support for file upload can be easily added by inserting the respective component. The server side handling is generated automatically."</p>
+                    <p>"Also note that this part of the form won't be rendered in the output PDF. On the other hand, the output PDF can contain sections that are not shown here."</p>
+                    <FileUpload bind="files"/>
+                </div>
 
-                        view! {
-                            <fieldset class="cols-2">
-                                <legend>{format!("Child {}", idx + 1)}</legend>
-                                <Input<NonEmptyString> label=t!(i18n, first_name) bind="first_name" placeholder="Max" />
-                                <Input<NonEmptyString> label=t!(i18n, last_name) bind="last_name" placeholder="Muster" />
-                                <Input<u32> label=t!(i18n, age)bind="age"/>
-                            </fieldset>
-                        }
-                    }>
-                    </Repeatable>
-                
-                    <div class="no-print">
-                        <h2 class="no-print">"Uploading Files"</h2>
-                        <p>"Support for file upload can be easily added by inserting the respective component. The server side handling is generated automatically."</p>
-                        <p>"Also note that this part of the worm won't be rendered in the output PDF. On the other hand, the output PDF can contain sections that are not shown here."</p>
-                        <FileUpload bind="files"/>
-                    </div>
-                
-                    <div class="no-print">
-                        <h2 class="no-print">"The Grand Finale"</h2>
-                        <p class="no-print">"Please check the preview of your form by clicking the preview button on the bottom right."</p>
-                        <p class="no-print">"After you have confirmed that everything looks alright, you can click submit button send the data to the server and generate the final PDF."</p>
-                    </div>
-                        
+                <div class="no-print">
+                    <h2 class="no-print">"The Grand Finale"</h2>
+                    <p class="no-print">"Please check the preview of your form by clicking the preview button on the bottom right."</p>
+                    <p class="no-print">"After you have confirmed that everything looks alright, you can click submit button send the data to the server and generate the final PDF."</p>
+                </div>
 
-                    <h2 class="only-print">"Signatures"</h2>
-                </Page>
-            </Pages>
-           
+
+                <h2 class="only-print">"Signatures"</h2>
+            </Page>
 
         </NovaForm>
     }
@@ -108,11 +107,17 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
 // Defines the server action for form submission.
 #[server]
 async fn on_submit(form_data: DemoForm) -> Result<(), ServerFnError> {
+    use crate::app::I18nContextProvider;
+
     println!("form data received: {:#?}", form_data);
 
     let pdf_gen = expect_context::<PdfGen>();
     let output_path = pdf_gen
-        .render_form(move || view! { <DemoForm form_data=form_data/> })
+        .render_form(move || view! {
+            <I18nContextProvider>
+                <DemoForm form_data=form_data/>
+            </I18nContextProvider>
+        })
         .await?;
 
     println!("form successfully rendered: {:?}", output_path);

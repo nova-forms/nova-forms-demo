@@ -38,6 +38,7 @@ header {
 	padding: 16px;
 	position: sticky;
 	top: 0;
+	z-index: 1000;
 }
 
 #logo {
@@ -66,14 +67,18 @@ legend {
 	color: var(--dark);
 }
 
+/* Icon styles */
+.material-symbols-rounded {
+	display: inline-block;
+}
+
 /* Button styles */
 input[type=submit], input[type=button], button, .button {
 	border: none;
 	background-color: var(--primary);
 	padding: 8px;
 	color: var(--light);
-	margin-top: 4px;
-	margin-bottom: 4px;
+	margin: 4px;
 	border-radius: 16px;
 	cursor: pointer;
 	box-shadow: 0 -2px 0 rgba(0, 0, 0, 0.2) inset;
@@ -86,14 +91,34 @@ input[type=submit]:hover, input[type=button]:hover, button:hover, .button:hover 
 	box-shadow: 0 0 0;
 }
 
-input[type=submit] + input[type=submit], input[type=button] + input[type=button], button + button, .button + .button {
+/*input[type=submit] + input[type=submit], input[type=button] + input[type=button], button + button, .button + .button {
 	margin-left: 8px;
+}*/
+
+.icon-button, .icon-select {
+	height: 40px;
+	border-radius: 20px;
+	display: inline-flex;
+	align-items: center;
 }
 
-.icon-button {
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
+.icon-select select {
+	position: absolute;
+	width: 0;
+	height: 0;
+	padding: 0;
+	margin: 0;
+	border: none;
+	background: none;
+	color: var(--light);
+	font-weight: bold;
+	padding: 4px;
+}
+
+.icon-select select:focus {
+	position: static;
+	width: auto;
+	height: auto;
 }
 
 /* Other input styles */
@@ -249,6 +274,7 @@ span.error {
 
 		form {
 			padding: 32px;
+			padding-bottom: 80px;
 			min-height: auto;
 		}
 
@@ -304,5 +330,13 @@ span.error {
 
 	span.error {
 		display: none;
+	}
+
+	#nova-form-actions {
+		display: none;
+	}
+
+	.ui {
+		display: none !important;
 	}
 }

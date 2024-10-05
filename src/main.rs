@@ -21,9 +21,12 @@ async fn main() {
 
     // build our application with a route
     let app = Router::new()
-        .leptos_routes_with_context(&leptos_options, routes, move || {
-            provide_context(pdf_gen.clone())
-        }, App)
+        .leptos_routes_with_context(
+            &leptos_options,
+            routes,
+            move || provide_context(pdf_gen.clone()),
+            App,
+        )
         .fallback(file_and_error_handler)
         .with_state(leptos_options);
 

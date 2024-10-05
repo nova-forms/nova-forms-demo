@@ -116,6 +116,9 @@ lib-default-features = false
 # Optional. Defaults to "release".
 lib-profile-release = "wasm-release"
 
+# Track the locales directory
+watch-additional-files = ["locales"]
+
 [package.metadata.leptos-i18n]
 default = "en"
 locales = ["en", "de"]
