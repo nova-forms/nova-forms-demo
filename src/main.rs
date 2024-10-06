@@ -17,14 +17,17 @@ async fn main() {
     let addr = leptos_options.site_addr;
     let routes = generate_route_list(App);
     let pdf_gen = nova_forms::PdfGen::new();
-    //let file_store = nova_forms::FileStore::new();
+    let file_store = nova_forms::FileStore::new().await.unwrap();
 
     // build our application with a route
     let app = Router::new()
         .leptos_routes_with_context(
             &leptos_options,
             routes,
-            move || provide_context(pdf_gen.clone()),
+            move || {
+                provide_context(pdf_gen.clone());
+                provide_context(file_store.clone());
+            },
             App,
         )
         .fallback(file_and_error_handler)

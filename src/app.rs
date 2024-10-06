@@ -29,10 +29,17 @@ pub struct DemoForm {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct Address {
+    street: String,
+    house_number: String,
+    zip: String,
+    city: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PersonData {
     first_name: NonEmptyString,
     last_name: NonEmptyString,
-    age: u32,
 }
 
 // Defines how to render the form.
@@ -41,7 +48,9 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
     // Get the locale context.
     let i18n = use_i18n();
     // Define the submit server action.
-    let submit_action = Action::<OnSubmit, _>::server();
+    let submit_action = create_server_action::<OnSubmit>();
+    // Use the zip service to resolve city names.
+    let (set_zip, city) = use_zip_service();
 
     view! {
         // Injects a stylesheet into the document <head>.
@@ -61,16 +70,19 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
                 // Section about the client.
                 <h2>{t!(i18n, about_yourself)}</h2>
                 <p>{t!(i18n, about_yourself_message)}</p>
-                <Group bind="me">
-                    <fieldset class="cols-2">
-                        <legend>{t!(i18n, about_yourself)}</legend>
+                <fieldset class="cols-2">
+                    <legend>{t!(i18n, about_yourself)}</legend>
+                    <Group bind="me">
                         <Input<NonEmptyString> label=t!(i18n, first_name) bind="first_name" placeholder="Max" />
                         <Input<NonEmptyString> label=t!(i18n, last_name) bind="last_name" placeholder="Muster" />
-                        <Input<u32> label=t!(i18n, age)bind="age"/>
-                    </fieldset>
-                </Group>
-
-                <Address bind="address"/>
+                    </Group>
+                    <Group bind="address">
+                        <Input<String> bind="street" label="Street" />
+                        <Input<String> bind="house_number" label="House Number" />
+                        <Input<String> bind="zip" label="ZIP Code" on:input=set_zip />
+                        <Input<String> bind="city" label="City" value=city />
+                    </Group>
+                </fieldset>
             </Page>
 
             <Page id="second-page" label={t!(i18n, your_children)}>
@@ -79,15 +91,12 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
                 <h2>{t!(i18n, your_children)}</h2>
                 <p>"Add the personal information of your children here. You can easily add and remove children with the respective buttons."</p>
                 <p>"This demonstrates the ability to dynamically add and remove components, or have repeatable components"</p>
-                <Repeatable bind="children" item = |idx| {
-                    let i18n = use_i18n();
-
+                <Repeatable bind="children" item = move |idx| {
                     view! {
                         <fieldset class="cols-2">
                             <legend>{format!("Child {}", idx + 1)}</legend>
                             <Input<NonEmptyString> label=t!(i18n, first_name) bind="first_name" placeholder="Max" />
                             <Input<NonEmptyString> label=t!(i18n, last_name) bind="last_name" placeholder="Muster" />
-                            <Input<u32> label=t!(i18n, age)bind="age"/>
                         </fieldset>
                     }
                 }>

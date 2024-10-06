@@ -58,6 +58,7 @@ header {
 /* Fieldset styles */
 fieldset {
 	border: 1px solid var(--dark);
+	border-radius: 4px;
 	margin-top: 1em;
 	margin-bottom: 1em;
 	page-break-inside: avoid;
@@ -123,13 +124,17 @@ input[type=submit]:hover, input[type=button]:hover, button:hover, .button:hover 
 
 /* Other input styles */
 input[type=number], input[type=text] {
-	padding-top: 4px;
+	padding: 4px;
 	width: 100%;
 	box-sizing: border-box;
-	border: none;
-	border-bottom: 1px solid var(--lightgray);
+	border: 1px solid var(--lightgray);
+	border-radius: 4px;
 	font-family: "Caveat", cursive;
 	font-size: 20px;
+}
+
+.error input[type=number], .error input[type=text] {
+	border: 1px solid var(--danger);
 }
 
 /* Multicolumn styles */
@@ -141,7 +146,7 @@ input[type=number], input[type=text] {
 }
 
 /* Error messages */
-span.error {
+.error-message {
 	color: var(--danger);
 }
 
@@ -332,7 +337,7 @@ span.error {
 		display: none !important;
 	}
 
-	span.error {
+	.error-message {
 		display: none;
 	}
 
