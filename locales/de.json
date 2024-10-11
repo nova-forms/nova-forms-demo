@@ -7,5 +7,19 @@
   "age": "Alter",
   "first_name": "Vorname",
   "last_name": "Nachname",
-  "your_children": "Ihre Kinder"
+  "your_children": "Ihre Kinder",
+  "city": "Ort",
+  "house_number": "Hausnummer",
+  "zip_code": "PLZ",
+  "street": "Strasse",
+  "child": "Kind {{num}}",
+  "children_information_message": "Fügen Sie hier die persönlichen Daten Ihrer Kinder hinzu. Mit den entsprechenden Schaltflächen können Sie ganz einfach Kinder hinzufügen und entfernen.",
+  "repeatable_information_message": "Dies demonstriert die Fähigkeit, Komponenten dynamisch hinzuzufügen und zu entfernen oder über wiederholbare Komponenten zu verfügen",
+  "uploading_files": "Hochladen von Dateien",
+  "uploading_files_message": "Die Unterstützung für das Hochladen von Dateien kann einfach durch Einfügen der entsprechenden Komponente hinzugefügt werden. Das serverseitige Handling wird automatisch generiert.",
+  "pdf_rendering_note": "Beachten Sie ausserdem, dass dieser Teil des Formulars nicht im Ausgabe-PDF gerendert wird. Andererseits kann das Ausgabe-PDF Abschnitte enthalten, die hier nicht angezeigt werden.",
+  "the_grand_finale": "Das grosse Finale",
+  "check_form_preview_message": "Bitte überprüfen Sie die Vorschau Ihres Formulars, indem Sie unten rechts auf die Schaltfläche „Vorschau“ klicken.",
+  "submit_message": "Nachdem Sie bestätigt haben, dass alles in Ordnung ist, können Sie auf die Schaltfläche „Senden“ klicken, die Daten an den Server senden und das endgültige PDF generieren.",
+  "signatures": "Unterschriften"
 }

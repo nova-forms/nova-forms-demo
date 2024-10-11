@@ -7,5 +7,19 @@
   "first_name": "First Name",
   "last_name": "Last Name",
   "age": "Age",
-  "your_children": "Your Children"
+  "your_children": "Your Children",
+  "street": "Street",
+  "house_number": "House Number",
+  "zip_code": "ZIP Code",
+  "city": "City",
+  "child": "Child {{num}}",
+  "children_information_message": "Add the personal information of your children here. You can easily add and remove children with the respective buttons.",
+  "repeatable_information_message": "This demonstrates the ability to dynamically add and remove components, or have repeatable components",
+  "uploading_files": "Uploading Files",
+  "uploading_files_message": "Support for file upload can be easily added by inserting the respective component. The server side handling is generated automatically.",
+  "pdf_rendering_note": "Also note that this part of the form won't be rendered in the output PDF. On the other hand, the output PDF can contain sections that are not shown here.",
+  "the_grand_finale": "The Grand Finale",
+  "check_form_preview_message": "Please check the preview of your form by clicking the preview button on the bottom right.",
+  "submit_message": "After you have confirmed that everything looks alright, you can click submit button send the data to the server and generate the final PDF.",
+  "signatures": "Signatures"
 }

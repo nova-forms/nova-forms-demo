@@ -63,11 +63,9 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
         // Defines how to render the form itself.
         <NovaForm form_data=form_data on_submit=submit_action bind="form_data" i18n=i18n>
 
-            <Page id="first-page" label={t!(i18n, about_yourself)}>
+            <Page id="first-page" label=t!(i18n, about_yourself)>
                 <h1>{t!(i18n, demo_form)}</h1>
                 <p>{t!(i18n, welcome_message)}</p>
-
-                // Section about the client.
                 <h2>{t!(i18n, about_yourself)}</h2>
                 <p>{t!(i18n, about_yourself_message)}</p>
                 <fieldset class="cols-2">
@@ -77,46 +75,40 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
                         <Input<NonEmptyString> label=t!(i18n, last_name) bind="last_name" placeholder="Muster" />
                     </Group>
                     <Group bind="address">
-                        <Input<String> bind="street" label="Street" />
-                        <Input<String> bind="house_number" label="House Number" />
-                        <Input<String> bind="zip" label="ZIP Code" on:input=set_zip />
-                        <Input<String> bind="city" label="City" value=city />
+                        <Input<String> bind="street" label=t!(i18n, street) />
+                        <Input<String> bind="house_number" label=t!(i18n, house_number) />
+                        <Input<String> bind="zip" label=t!(i18n, zip_code) on:input=set_zip />
+                        <Input<String> bind="city" label=t!(i18n, city) value=city />
                     </Group>
                 </fieldset>
             </Page>
 
             <Page id="second-page" label={t!(i18n, your_children)}>
-
                 // Repeatable section for children of the client.
                 <h2>{t!(i18n, your_children)}</h2>
-                <p>"Add the personal information of your children here. You can easily add and remove children with the respective buttons."</p>
-                <p>"This demonstrates the ability to dynamically add and remove components, or have repeatable components"</p>
-                <Repeatable bind="children" item = move |idx| {
-                    view! {
-                        <fieldset class="cols-2">
-                            <legend>{format!("Child {}", idx + 1)}</legend>
-                            <Input<NonEmptyString> label=t!(i18n, first_name) bind="first_name" placeholder="Max" />
-                            <Input<NonEmptyString> label=t!(i18n, last_name) bind="last_name" placeholder="Muster" />
-                        </fieldset>
-                    }
+                <p>{t!(i18n, children_information_message)}</p>
+                <p>{t!(i18n, repeatable_information_message)}</p>
+                <Repeatable bind="children" item = move |idx| view! {
+                    <fieldset class="cols-2">
+                        <legend>{t!(i18n, child, num = move || idx + 1)}</legend>
+                        <Input<NonEmptyString> label=t!(i18n, first_name) bind="first_name" placeholder="Max" />
+                        <Input<NonEmptyString> label=t!(i18n, last_name) bind="last_name" placeholder="Muster" />
+                    </fieldset>
                 }>
                 </Repeatable>
 
                 <div class="no-print">
-                    <h2 class="no-print">"Uploading Files"</h2>
-                    <p>"Support for file upload can be easily added by inserting the respective component. The server side handling is generated automatically."</p>
-                    <p>"Also note that this part of the form won't be rendered in the output PDF. On the other hand, the output PDF can contain sections that are not shown here."</p>
+                    <h2>{t!(i18n, uploading_files)}</h2>
+                    <p>{t!(i18n, uploading_files_message)}</p>
+                    <p>{t!(i18n, pdf_rendering_note)}</p>
                     <FileUpload bind="files"/>
+
+                    <h2>{t!(i18n, the_grand_finale)}</h2>
+                    <p>{t!(i18n, check_form_preview_message)}</p>
+                    <p>{t!(i18n, submit_message)}</p>
                 </div>
 
-                <div class="no-print">
-                    <h2 class="no-print">"The Grand Finale"</h2>
-                    <p class="no-print">"Please check the preview of your form by clicking the preview button on the bottom right."</p>
-                    <p class="no-print">"After you have confirmed that everything looks alright, you can click submit button send the data to the server and generate the final PDF."</p>
-                </div>
-
-
-                <h2 class="only-print">"Signatures"</h2>
+                <h2 class="only-print">{t!(i18n, signatures)}</h2>
             </Page>
 
         </NovaForm>
@@ -129,7 +121,6 @@ async fn on_submit(form_data: DemoForm, meta_data: MetaData) -> Result<(), Serve
     use crate::app::NovaFormContextProvider;
 
     println!("form data received: {:#?}", form_data);
-    println!("meta data received: {:#?}", meta_data);
 
     let pdf_gen = expect_context::<PdfGen>();
     let output_path = pdf_gen
