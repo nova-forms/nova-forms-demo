@@ -92,6 +92,13 @@ input[type=submit]:hover, input[type=button]:hover, button:hover, .button:hover 
 	box-shadow: 0 0 0;
 }
 
+input[type=submit]:disabled, input[type=button]:disabled, button:disabled, .button:disabled {
+	background-color: var(--lightgray);
+	color: var(--dark);
+	cursor: not-allowed;
+}
+
+
 /*input[type=submit] + input[type=submit], input[type=button] + input[type=button], button + button, .button + .button {
 	margin-left: 8px;
 }*/
