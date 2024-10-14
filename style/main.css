@@ -5,8 +5,11 @@
 	--primary: #dc9e26;
 	--secondary: #062544;
 	--danger: #c2185b;
+	--danger-light: #ecb9cd;
 	--warning: #dc9e26;
+	--warning-light: #e4e1bd;
 	--success: #3dcc79;
+	--success-light: #c4efd6;
 	--gray: #7e7e7e;
 	--lightgray: #e7e7e7;
 	--light: #fff;
@@ -142,7 +145,14 @@ input[type=number], input[type=text] {
 
 .error input[type=number], .error input[type=text] {
 	border: 1px solid var(--danger);
+	background-color: var(--danger-light);
 }
+
+.ok input[type=number], .ok input[type=text] {
+	border: 1px solid var(--success);
+	background-color: var(--success-light);
+}
+
 
 /* Multicolumn styles */
 .cols-2 {
@@ -176,6 +186,8 @@ input[type=number], input[type=text] {
 	margin: auto;
 	position: static;
 	padding: 0;
+	width: 100%;
+	max-width: 256px;
 }
 
 .modal .modal-header {
@@ -323,11 +335,12 @@ input[type=number], input[type=text] {
 	}
 
 	input[type=number], input[type=text] {
-		border: none;
 		padding: 0;
 		margin: 0;
 		font-size: 20px;
 		color: var(--dark);
+		border: none !important;
+		background: none !important;
 	}
 
 	input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {
