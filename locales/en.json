@@ -21,5 +21,7 @@
   "the_grand_finale": "The Grand Finale",
   "check_form_preview_message": "Please check the preview of your form by clicking the preview button on the bottom right.",
   "submit_message": "After you have confirmed that everything looks alright, you can click submit button send the data to the server and generate the final PDF.",
-  "signatures": "Signatures"
+  "signatures": "Signatures",
+  "error_empty_string": "This field cannot be empty.",
+  "error_invalid_format": "An invalid format was provided."
 }

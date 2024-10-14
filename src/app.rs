@@ -52,6 +52,11 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
     // Use the zip service to resolve city names.
     let (set_zip, city) = use_zip_service();
 
+    // Define custom error message translations.
+    provide_context(Translate::from(move |err| match err {
+        NonEmptyStringError::EmptyString => t!(i18n, error_empty_string).into_view(),
+    }));
+
     view! {
         // Injects a stylesheet into the document <head>.
         // id=leptos means cargo-leptos will hot-reload this stylesheet.
@@ -61,7 +66,7 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
         <Title text=t!(i18n, demo_form)/>
 
         // Defines how to render the form itself.
-        <NovaForm form_data=form_data on_submit=submit_action bind="form_data" i18n=i18n>
+        <NovaForm form_data=form_data on_submit=submit_action bind="form_data" bind_meta_data="meta_data" i18n=i18n>
 
             <Page id="first-page" label=t!(i18n, about_yourself)>
                 <h1>{t!(i18n, demo_form)}</h1>
@@ -71,8 +76,8 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
                 <fieldset class="cols-2">
                     <legend>{t!(i18n, about_yourself)}</legend>
                     <Group bind="me">
-                        <Input<NonEmptyString> label=t!(i18n, first_name) bind="first_name" placeholder="Max" />
-                        <Input<NonEmptyString> label=t!(i18n, last_name) bind="last_name" placeholder="Muster" />
+                        <Input<NonEmptyString> label=t!(i18n, first_name) bind="first_name" />
+                        <Input<NonEmptyString> label=t!(i18n, last_name) bind="last_name" />
                     </Group>
                     <Group bind="address">
                         <Input<String> bind="street" label=t!(i18n, street) />
@@ -84,15 +89,14 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
             </Page>
 
             <Page id="second-page" label={t!(i18n, your_children)}>
-                // Repeatable section for children of the client.
                 <h2>{t!(i18n, your_children)}</h2>
                 <p>{t!(i18n, children_information_message)}</p>
                 <p>{t!(i18n, repeatable_information_message)}</p>
                 <Repeatable bind="children" item = move |idx| view! {
                     <fieldset class="cols-2">
                         <legend>{t!(i18n, child, num = move || idx + 1)}</legend>
-                        <Input<NonEmptyString> label=t!(i18n, first_name) bind="first_name" placeholder="Max" />
-                        <Input<NonEmptyString> label=t!(i18n, last_name) bind="last_name" placeholder="Muster" />
+                        <Input<NonEmptyString> label=t!(i18n, first_name) bind="first_name" />
+                        <Input<NonEmptyString> label=t!(i18n, last_name) bind="last_name" />
                     </fieldset>
                 }>
                 </Repeatable>
@@ -102,7 +106,6 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
                     <p>{t!(i18n, uploading_files_message)}</p>
                     <p>{t!(i18n, pdf_rendering_note)}</p>
                     <FileUpload bind="files"/>
-
                     <h2>{t!(i18n, the_grand_finale)}</h2>
                     <p>{t!(i18n, check_form_preview_message)}</p>
                     <p>{t!(i18n, submit_message)}</p>

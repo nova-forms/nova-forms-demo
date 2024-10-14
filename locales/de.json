@@ -21,5 +21,7 @@
   "the_grand_finale": "Das grosse Finale",
   "check_form_preview_message": "Bitte überprüfen Sie die Vorschau Ihres Formulars, indem Sie unten rechts auf die Schaltfläche „Vorschau“ klicken.",
   "submit_message": "Nachdem Sie bestätigt haben, dass alles in Ordnung ist, können Sie auf die Schaltfläche „Senden“ klicken, die Daten an den Server senden und das endgültige PDF generieren.",
-  "signatures": "Unterschriften"
+  "signatures": "Unterschriften",
+  "error_empty_string": "Dieses Feld darf nicht leer sein.",
+  "error_invalid_format": "Es wurde ein ungültiges Format angegeben."
 }
