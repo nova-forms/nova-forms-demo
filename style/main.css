@@ -318,6 +318,10 @@ input[type=number], input[type=text] {
 
 /* Applied while printing */
 @media print {
+	body {
+		background-color: var(--lightgray);
+	}
+
 	#preview {
 		display: none;
 	}

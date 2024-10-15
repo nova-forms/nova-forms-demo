@@ -53,9 +53,9 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
     let (set_zip, city) = use_zip_service();
 
     // Define custom error message translations.
-    provide_context(Translate::from(move |err| match err {
-        NonEmptyStringError::EmptyString => t!(i18n, error_empty_string).into_view(),
-    }));
+    provide_translation_context(move |err| match err {
+        NonEmptyStringError::EmptyString => t!(i18n, error_empty_string),
+    });
 
     view! {
         // Injects a stylesheet into the document <head>.
