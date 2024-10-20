@@ -619,6 +619,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b42b6fa04a440b495c8b04d0e71b707c585f83cb9cb28cf8cd0d976c315e31b4"
 dependencies = [
  "powerfmt",
+ "serde",
 ]
 
 [[package]]
@@ -930,6 +931,18 @@ dependencies = [
  "wasm-bindgen",
  "wasm-bindgen-futures",
  "web-sys",
+]
+
+[[package]]
+name = "gloo-timers"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bbb143cf96099802033e0d4f4963b19fd2e0b728bcf076cd9cf7f6634f092994"
+dependencies = [
+ "futures-channel",
+ "futures-core",
+ "js-sys",
+ "wasm-bindgen",
 ]
 
 [[package]]
@@ -1687,6 +1700,8 @@ dependencies = [
  "codee",
  "cookie",
  "default-struct-builder",
+ "futures-util",
+ "gloo-timers",
  "http",
  "js-sys",
  "lazy_static",
@@ -1694,6 +1709,7 @@ dependencies = [
  "leptos_axum",
  "paste",
  "thiserror",
+ "unic-langid",
  "wasm-bindgen",
  "wasm-bindgen-futures",
  "web-sys",
@@ -2153,12 +2169,17 @@ dependencies = [
 name = "nova-forms"
 version = "0.1.0"
 dependencies = [
+ "codee",
  "futures",
  "js-sys",
  "leptos",
+ "leptos-use",
  "leptos_i18n",
  "leptos_meta",
  "leptos_router",
+ "num-bigint",
+ "num-rational",
+ "percent-encoding",
  "regex",
  "reqwest",
  "serde",
@@ -2166,6 +2187,7 @@ dependencies = [
  "server_fn",
  "sqlx",
  "thiserror",
+ "time",
  "tokio",
  "uuid",
  "web-sys",
@@ -2202,6 +2224,7 @@ checksum = "a5e44f723f1133c9deac646763579fdb3ac745e418f2a7af9cd0c431da1f20b9"
 dependencies = [
  "num-integer",
  "num-traits",
+ "serde",
 ]
 
 [[package]]
@@ -2256,6 +2279,7 @@ dependencies = [
  "num-bigint",
  "num-integer",
  "num-traits",
+ "serde",
 ]
 
 [[package]]
@@ -2266,6 +2290,15 @@ checksum = "071dfc062690e90b734c0b2273ce72ad0ffa95f0c74596bc250dcfd960262841"
 dependencies = [
  "autocfg",
  "libm",
+]
+
+[[package]]
+name = "num_threads"
+version = "0.1.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5c7398b9c8b70908f6371f47ed36737907c87c52af34c268fed0bf0ceb92ead9"
+dependencies = [
+ "libc",
 ]
 
 [[package]]
@@ -3547,7 +3580,10 @@ checksum = "5dfd88e563464686c916c7e46e623e520ddc6d79fa6641390f2e3fa86e83e885"
 dependencies = [
  "deranged",
  "itoa",
+ "js-sys",
+ "libc",
  "num-conv",
+ "num_threads",
  "powerfmt",
  "serde",
  "time-core",
@@ -3855,6 +3891,24 @@ name = "typenum"
 version = "1.17.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "42ff0bf0c66b8238c6f3b578df37d0b7848e55df8577b3f74f92a69acceeb825"
+
+[[package]]
+name = "unic-langid"
+version = "0.9.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "23dd9d1e72a73b25e07123a80776aae3e7b0ec461ef94f9151eed6ec88005a44"
+dependencies = [
+ "unic-langid-impl",
+]
+
+[[package]]
+name = "unic-langid-impl"
+version = "0.9.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0a5422c1f65949306c99240b81de9f3f15929f5a8bfe05bb44b034cc8bf593e5"
+dependencies = [
+ "tinystr",
+]
 
 [[package]]
 name = "unicase"

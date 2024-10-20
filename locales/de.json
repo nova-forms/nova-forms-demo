@@ -23,5 +23,13 @@
   "submit_message": "Nachdem Sie bestätigt haben, dass alles in Ordnung ist, können Sie auf die Schaltfläche „Senden“ klicken, die Daten an den Server senden und das endgültige PDF generieren.",
   "signatures": "Unterschriften",
   "error_empty_string": "Dieses Feld darf nicht leer sein.",
-  "error_invalid_format": "Es wurde ein ungültiges Format angegeben."
+  "error_invalid_format": "Es wurde ein ungültiges Format angegeben.",
+  "datatypes": "Datentypen",
+  "datatypes_message": "Die folgenden weiteren Datentypen werden bisher mit vollständiger Validierung unterstützt.",
+  "telephone": "Telefon",
+  "date_time": "Datum und Uhrzeit",
+  "email": "E-Mail",
+  "time": "Zeit",
+  "date": "Datum",
+  "boolean": "Boolescher Wert"
 }
