@@ -133,7 +133,7 @@ input[type=submit]:disabled, input[type=button]:disabled, button:disabled, .butt
 }
 
 /* Other input styles */
-input[type=number], input[type=text] {
+.field input {
 	padding: 4px;
 	width: 100%;
 	box-sizing: border-box;
@@ -143,12 +143,12 @@ input[type=number], input[type=text] {
 	font-size: 20px;
 }
 
-.error input[type=number], .error input[type=text] {
+.field.error input {
 	border: 1px solid var(--danger);
 	background-color: var(--danger-light);
 }
 
-.ok input[type=number], .ok input[type=text] {
+.field.ok input {
 	border: 1px solid var(--success);
 	background-color: var(--success-light);
 }
@@ -338,7 +338,7 @@ input[type=number], input[type=text] {
 		display: none;
 	}
 
-	input[type=number], input[type=text] {
+	.field input {
 		padding: 0;
 		margin: 0;
 		font-size: 20px;

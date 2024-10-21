@@ -23,5 +23,13 @@
   "submit_message": "After you have confirmed that everything looks alright, you can click submit button send the data to the server and generate the final PDF.",
   "signatures": "Signatures",
   "error_empty_string": "This field cannot be empty.",
-  "error_invalid_format": "An invalid format was provided."
+  "error_invalid_format": "An invalid format was provided.",
+  "datatypes": "Datatypes",
+  "datatypes_message": "The following further datatypes are supported so far, with full validation.",
+  "email": "Email",
+  "telephone": "Telephone",
+  "date_time": "Date and Time",
+  "date": "Date",
+  "time": "Time",
+  "boolean": "Boolean"
 }

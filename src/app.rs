@@ -57,6 +57,8 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
         NonEmptyStringError::EmptyString => t!(i18n, error_empty_string),
     });
 
+    provide_context(TranslationProvider::from(move |err: OffsetDateTimeError| format!("Error: {:?}", err).into_view()));
+
     view! {
         // Injects a stylesheet into the document <head>.
         // id=leptos means cargo-leptos will hot-reload this stylesheet.
@@ -114,6 +116,22 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
                 <h2 class="only-print">{t!(i18n, signatures)}</h2>
             </Page>
 
+            <Page id="third-page" label={t!(i18n, datatypes)}>
+                <h2>{t!(i18n, datatypes)}</h2>
+                <p>{t!(i18n, datatypes_message)}</p>
+                <fieldset class="cols-2">
+                    <legend>{t!(i18n, datatypes)}</legend>
+                    <Group bind="datatypes">
+                        <Input<Email> bind="email" label=t!(i18n, email) />
+                        <Input<Telephone> bind="phone" label=t!(i18n, telephone) />
+                        <Input<Date> bind="date" label=t!(i18n, date) />
+                        <Input<Time> bind="time" label=t!(i18n, time) />
+                        <Input<DateTime> bind="date_time" label=t!(i18n, date_time) />
+                        <Input<bool> bind="bool" label=t!(i18n, boolean) />
+                    </Group>
+                </fieldset>
+            </Page>
+
         </NovaForm>
     }
 }
@@ -124,6 +142,7 @@ async fn on_submit(form_data: DemoForm, meta_data: MetaData) -> Result<(), Serve
     use crate::app::NovaFormContextProvider;
 
     println!("form data received: {:#?}", form_data);
+    println!("meta data received: {:#?}", meta_data);
 
     let pdf_gen = expect_context::<PdfGen>();
     let output_path = pdf_gen
