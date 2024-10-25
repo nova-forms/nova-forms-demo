@@ -132,7 +132,8 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
                 </Page>
             </Pages>
 
-            <PagePrevNextButtons/>
+            <PageStepper/>
+            
         </NovaForm>
     }
 }
