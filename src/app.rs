@@ -57,8 +57,6 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
         NonEmptyStringError::EmptyString => t!(i18n, error_empty_string),
     });
 
-    provide_context(TranslationProvider::from(move |err: OffsetDateTimeError| format!("Error: {:?}", err).into_view()));
-
     view! {
         // Injects a stylesheet into the document <head>.
         // id=leptos means cargo-leptos will hot-reload this stylesheet.
@@ -70,68 +68,71 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
         // Defines how to render the form itself.
         <NovaForm form_data=form_data on_submit=submit_action bind="form_data" bind_meta_data="meta_data" i18n=i18n>
 
-            <Page id="first-page" label=t!(i18n, about_yourself)>
-                <h1>{t!(i18n, demo_form)}</h1>
-                <p>{t!(i18n, welcome_message)}</p>
-                <h2>{t!(i18n, about_yourself)}</h2>
-                <p>{t!(i18n, about_yourself_message)}</p>
-                <fieldset class="cols-2">
-                    <legend>{t!(i18n, about_yourself)}</legend>
-                    <Group bind="me">
-                        <Input<NonEmptyString> label=t!(i18n, first_name) bind="first_name" />
-                        <Input<NonEmptyString> label=t!(i18n, last_name) bind="last_name" />
-                    </Group>
-                    <Group bind="address">
-                        <Input<String> bind="street" label=t!(i18n, street) />
-                        <Input<String> bind="house_number" label=t!(i18n, house_number) />
-                        <Input<String> bind="zip" label=t!(i18n, zip_code) on:input=set_zip />
-                        <Input<String> bind="city" label=t!(i18n, city) value=city />
-                    </Group>
-                </fieldset>
-            </Page>
-
-            <Page id="second-page" label={t!(i18n, your_children)}>
-                <h2>{t!(i18n, your_children)}</h2>
-                <p>{t!(i18n, children_information_message)}</p>
-                <p>{t!(i18n, repeatable_information_message)}</p>
-                <Repeatable bind="children" item = move |idx| view! {
+            <Pages>
+                <Page id="first-page" label=t!(i18n, about_yourself)>
+                    <h1>{t!(i18n, demo_form)}</h1>
+                    <p>{t!(i18n, welcome_message)}</p>
+                    <h2>{t!(i18n, about_yourself)}</h2>
+                    <p>{t!(i18n, about_yourself_message)}</p>
                     <fieldset class="cols-2">
-                        <legend>{t!(i18n, child, num = move || idx + 1)}</legend>
-                        <Input<NonEmptyString> label=t!(i18n, first_name) bind="first_name" />
-                        <Input<NonEmptyString> label=t!(i18n, last_name) bind="last_name" />
+                        <legend>{t!(i18n, about_yourself)}</legend>
+                        <Group bind="me">
+                            <Input<NonEmptyString> label=t!(i18n, first_name) bind="first_name" />
+                            <Input<NonEmptyString> label=t!(i18n, last_name) bind="last_name" />
+                        </Group>
+                        <Group bind="address">
+                            <Input<String> bind="street" label=t!(i18n, street) />
+                            <Input<String> bind="house_number" label=t!(i18n, house_number) />
+                            <Input<String> bind="zip" label=t!(i18n, zip_code) on:input=set_zip />
+                            <Input<String> bind="city" label=t!(i18n, city) value=city />
+                        </Group>
                     </fieldset>
-                }>
-                </Repeatable>
+                </Page>
 
-                <div class="no-print">
-                    <h2>{t!(i18n, uploading_files)}</h2>
-                    <p>{t!(i18n, uploading_files_message)}</p>
-                    <p>{t!(i18n, pdf_rendering_note)}</p>
-                    <FileUpload bind="files"/>
-                    <h2>{t!(i18n, the_grand_finale)}</h2>
-                    <p>{t!(i18n, check_form_preview_message)}</p>
-                    <p>{t!(i18n, submit_message)}</p>
-                </div>
+                <Page id="second-page" label={t!(i18n, your_children)}>
+                    <h2>{t!(i18n, your_children)}</h2>
+                    <p>{t!(i18n, children_information_message)}</p>
+                    <p>{t!(i18n, repeatable_information_message)}</p>
+                    <Repeatable bind="children" item = move |idx| view! {
+                        <fieldset class="cols-2">
+                            <legend>{t!(i18n, child, num = move || idx + 1)}</legend>
+                            <Input<NonEmptyString> label=t!(i18n, first_name) bind="first_name" />
+                            <Input<NonEmptyString> label=t!(i18n, last_name) bind="last_name" />
+                        </fieldset>
+                    }>
+                    </Repeatable>
 
-                <h2 class="only-print">{t!(i18n, signatures)}</h2>
-            </Page>
+                    <div class="no-print">
+                        <h2>{t!(i18n, uploading_files)}</h2>
+                        <p>{t!(i18n, uploading_files_message)}</p>
+                        <p>{t!(i18n, pdf_rendering_note)}</p>
+                        <FileUpload bind="files"/>
+                        <h2>{t!(i18n, the_grand_finale)}</h2>
+                        <p>{t!(i18n, check_form_preview_message)}</p>
+                        <p>{t!(i18n, submit_message)}</p>
+                    </div>
 
-            <Page id="third-page" label={t!(i18n, datatypes)}>
-                <h2>{t!(i18n, datatypes)}</h2>
-                <p>{t!(i18n, datatypes_message)}</p>
-                <fieldset class="cols-2">
-                    <legend>{t!(i18n, datatypes)}</legend>
-                    <Group bind="datatypes">
-                        <Input<Email> bind="email" label=t!(i18n, email) />
-                        <Input<Telephone> bind="phone" label=t!(i18n, telephone) />
-                        <Input<Date> bind="date" label=t!(i18n, date) />
-                        <Input<Time> bind="time" label=t!(i18n, time) />
-                        <Input<DateTime> bind="date_time" label=t!(i18n, date_time) />
-                        <Input<bool> bind="bool" label=t!(i18n, boolean) />
-                    </Group>
-                </fieldset>
-            </Page>
+                    <h2 class="only-print">{t!(i18n, signatures)}</h2>
+                </Page>
 
+                <Page id="third-page" label={t!(i18n, datatypes)}>
+                    <h2>{t!(i18n, datatypes)}</h2>
+                    <p>{t!(i18n, datatypes_message)}</p>
+                    <fieldset class="cols-2">
+                        <legend>{t!(i18n, datatypes)}</legend>
+                        <Group bind="datatypes">
+                            <Input<Email> bind="email" label=t!(i18n, email) />
+                            <Input<Telephone> bind="phone" label=t!(i18n, telephone) />
+                            <Input<Date> bind="date" label=t!(i18n, date) />
+                            <Input<Time> bind="time" label=t!(i18n, time) />
+                            <Input<DateTime> bind="date_time" label=t!(i18n, date_time) />
+                            <Input<bool> bind="bool" label=t!(i18n, boolean) />
+                        </Group>
+                    </fieldset>
+                </Page>
+            </Pages>
+
+            <PagePrevNextButtons/>
         </NovaForm>
     }
 }

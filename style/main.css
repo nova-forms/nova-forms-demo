@@ -278,7 +278,7 @@ input[type=submit]:disabled, input[type=button]:disabled, button:disabled, .butt
 		display: none !important;
 	}
 
-	#nova-form-actions {
+	#toolbar {
 		position: sticky;
 		bottom: 0;
 		left: calc((100% - 210mm) / 2);
@@ -310,7 +310,7 @@ input[type=submit]:disabled, input[type=button]:disabled, button:disabled, .butt
 			grid-template-columns: 1fr;
 		}
 
-		#nova-form-actions {
+		#toolbar {
 			margin-top: -80px;
 		}
 	}
@@ -365,7 +365,7 @@ input[type=submit]:disabled, input[type=button]:disabled, button:disabled, .butt
 		display: none;
 	}
 
-	#nova-form-actions {
+	#toolbar {
 		display: none;
 	}
 
