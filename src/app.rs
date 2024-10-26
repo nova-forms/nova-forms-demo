@@ -1,7 +1,7 @@
 use leptos::*;
+use leptos_i18n::*;
 use leptos_meta::*;
 use nova_forms::*;
-use leptos_i18n::*;
 use serde::{Deserialize, Serialize};
 
 // This generates the `NovaFormContextProvider` component at compile-time to initialize all the necessary context.
@@ -12,7 +12,15 @@ init_nova_forms!();
 pub fn App() -> impl IntoView {
     view! {
         <NovaFormContextProvider>
-            <DemoForm/>
+        {
+            let i18n = use_i18n();
+            
+            view! {
+                <NovaFormWrapper title=t!(i18n, nova_forms) subtitle=t!(i18n, demo_form) logo="/logo.png">
+                    <DemoForm />
+                </NovaFormWrapper>  
+            }
+        }
         </NovaFormContextProvider>
     }
 }
@@ -20,12 +28,24 @@ pub fn App() -> impl IntoView {
 // Define the form data structure.
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DemoForm {
-    me: PersonData,
     address: Address,
     #[serde(default)]
     children: Vec<PersonData>,
     #[serde(default)]
     files: Vec<FileId>,
+    datatypes: Datatypes,
+}
+
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct Datatypes {
+    email: Email,
+    phone: Telephone,
+    date: Date,
+    time: Time,
+    date_time: DateTime,
+    #[serde(default)]
+    bool: bool,
+    accept: Accept,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -60,17 +80,26 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
     view! {
         // Injects a stylesheet into the document <head>.
         // id=leptos means cargo-leptos will hot-reload this stylesheet.
-        <Stylesheet id="leptos" href="/pkg/nova-forms-demo.css"/>
-
+        <Stylesheet id="leptos" href="/pkg/nova-forms-demo.css" />
+        <Link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0"
+        />
         // Sets the document title.
-        <Title text=t!(i18n, demo_form)/>
+        <Title text=t!(i18n, demo_form) />
 
         // Defines how to render the form itself.
-        <NovaForm form_data=form_data on_submit=submit_action bind="form_data" bind_meta_data="meta_data" i18n=i18n>
+        <NovaForm
+            form_data=form_data
+            on_submit=submit_action
+            bind="form_data"
+            bind_meta_data="meta_data"
+            i18n=i18n
+        >
 
             <Pages>
                 <Page id="first-page" label=t!(i18n, about_yourself)>
-                    <h1>{t!(i18n, demo_form)}</h1>
+                    <h1 class="font-semibold text-red-500">{t!(i18n, demo_form)}</h1>
                     <p>{t!(i18n, welcome_message)}</p>
                     <h2>{t!(i18n, about_yourself)}</h2>
                     <p>{t!(i18n, about_yourself_message)}</p>
@@ -89,7 +118,24 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
                     </fieldset>
                 </Page>
 
-                <Page id="second-page" label={t!(i18n, your_children)}>
+                <Page id="second-page" label=t!(i18n, datatypes)>
+                    <h2>{t!(i18n, datatypes)}</h2>
+                    <p>{t!(i18n, datatypes_message)}</p>
+                    <fieldset class="cols-2">
+                        <legend>{t!(i18n, datatypes)}</legend>
+                        <Group bind="datatypes">
+                            <Input<Email> bind="email" label=t!(i18n, email) />
+                            <Input<Telephone> bind="phone" label=t!(i18n, telephone) />
+                            <Input<Date> bind="date" label=t!(i18n, date) />
+                            <Input<Time> bind="time" label=t!(i18n, time) />
+                            <Input<DateTime> bind="date_time" label=t!(i18n, date_time) />
+                            <Checkbox<bool> bind="bool" label=t!(i18n, boolean) />
+                            <Checkbox<Accept> bind="accept" label=t!(i18n, accept) />
+                        </Group>
+                    </fieldset>
+                </Page>
+
+                <Page id="third-page" label=t!(i18n, the_grand_finale)>
                     <h2>{t!(i18n, your_children)}</h2>
                     <p>{t!(i18n, children_information_message)}</p>
                     <p>{t!(i18n, repeatable_information_message)}</p>
@@ -106,7 +152,7 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
                         <h2>{t!(i18n, uploading_files)}</h2>
                         <p>{t!(i18n, uploading_files_message)}</p>
                         <p>{t!(i18n, pdf_rendering_note)}</p>
-                        <FileUpload bind="files"/>
+                        <FileUpload bind="files" />
                         <h2>{t!(i18n, the_grand_finale)}</h2>
                         <p>{t!(i18n, check_form_preview_message)}</p>
                         <p>{t!(i18n, submit_message)}</p>
@@ -114,26 +160,10 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
 
                     <h2 class="only-print">{t!(i18n, signatures)}</h2>
                 </Page>
-
-                <Page id="third-page" label={t!(i18n, datatypes)}>
-                    <h2>{t!(i18n, datatypes)}</h2>
-                    <p>{t!(i18n, datatypes_message)}</p>
-                    <fieldset class="cols-2">
-                        <legend>{t!(i18n, datatypes)}</legend>
-                        <Group bind="datatypes">
-                            <Input<Email> bind="email" label=t!(i18n, email) />
-                            <Input<Telephone> bind="phone" label=t!(i18n, telephone) />
-                            <Input<Date> bind="date" label=t!(i18n, date) />
-                            <Input<Time> bind="time" label=t!(i18n, time) />
-                            <Input<DateTime> bind="date_time" label=t!(i18n, date_time) />
-                            <Input<bool> bind="bool" label=t!(i18n, boolean) />
-                        </Group>
-                    </fieldset>
-                </Page>
             </Pages>
 
-            <PageStepper/>
-            
+            <PageStepper />
+
         </NovaForm>
     }
 }
@@ -148,10 +178,12 @@ async fn on_submit(form_data: DemoForm, meta_data: MetaData) -> Result<(), Serve
 
     let pdf_gen = expect_context::<PdfGen>();
     let output_path = pdf_gen
-        .render_form(move || view! {
-            <NovaFormContextProvider meta_data=meta_data>
-                <DemoForm form_data=form_data/>
-            </NovaFormContextProvider>
+        .render_form(move || {
+            view! {
+                <NovaFormContextProvider meta_data=meta_data>
+                    <DemoForm form_data=form_data />
+                </NovaFormContextProvider>
+            }
         })
         .await?;
 

@@ -18,10 +18,50 @@
 	--margin: 2cm;
 }
 
+/* ====================
+ * GENERAL
+ * ====================
+ *
+ * General styles that apply to the whole document.
+ */
+
 body {
 	font-family: "Montserrat", sans-serif;
 	background: var(--secondary);
 	margin: 0;
+}
+
+/* Google icons */
+.material-symbols-rounded {
+	display: inline-block;
+}
+
+/* Accessible screen reader hiding for inputs */
+.sr-hidden {
+	position: absolute !important;
+	width: 0 !important;
+	height: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	overflow: hidden !important;
+}
+
+/* --------------------
+ * Nova Forms Wrapper
+ * --------------------
+ */
+
+main {
+	background: var(--lightgray);
+	padding-top: 2cm;
+	padding-bottom: 2cm;
+}
+
+@media screen and (max-width: 210mm) {
+	main {
+		padding-top: 0 !important;
+		padding-bottom: 0 !important;
+	}
 }
 
 header, footer {
@@ -58,26 +98,22 @@ header {
 	font-size: 24px;
 }
 
-/* Fieldset styles */
-fieldset {
-	border: 1px solid var(--dark);
-	border-radius: 4px;
-	margin-top: 1em;
-	margin-bottom: 1em;
-	page-break-inside: avoid;
-}
+/* ====================
+ * OVERLAY
+ * ====================
+ *
+ * Everything that is not part of the printed form is considered an overlay.
+ * This includes the header, footer, toolbar, the preview, overlay buttons etc.
+ */
 
-legend {
-	color: var(--dark);
-}
-
-/* Icon styles */
-.material-symbols-rounded {
-	display: inline-block;
-}
-
-/* Button styles */
-input[type=submit], input[type=button], button, .button {
+ /* -------------------
+  * Overlay Buttons
+  * -------------------
+  */
+input[type=submit],
+input[type=button],
+button,
+.button {
 	border: none;
 	background-color: var(--primary);
 	padding: 8px;
@@ -91,26 +127,31 @@ input[type=submit], input[type=button], button, .button {
 	box-sizing: border-box;
 }
 
-input[type=submit]:hover, input[type=button]:hover, button:hover, .button:hover {
+input[type=submit]:hover,
+input[type=button]:hover,
+button:hover,
+.button:hover {
 	box-shadow: 0 0 0;
 }
 
-input[type=submit]:disabled, input[type=button]:disabled, button:disabled, .button:disabled {
+input[type=submit]:disabled,
+input[type=button]:disabled,
+button:disabled,
+.button:disabled {
 	background-color: var(--lightgray);
-	color: var(--dark);
 	cursor: not-allowed;
 }
-
-
-/*input[type=submit] + input[type=submit], input[type=button] + input[type=button], button + button, .button + .button {
-	margin-left: 8px;
-}*/
 
 .icon-button, .icon-select {
 	height: 40px;
 	border-radius: 20px;
 	display: inline-flex;
 	align-items: center;
+}
+
+.icon-button {
+	width: 40px;
+	justify-content: center;
 }
 
 .icon-select select {
@@ -123,51 +164,47 @@ input[type=submit]:disabled, input[type=button]:disabled, button:disabled, .butt
 	background: none;
 	color: var(--light);
 	font-weight: bold;
-	padding: 4px;
 }
 
 .icon-select select:focus {
 	position: static;
 	width: auto;
 	height: auto;
+	padding-left: 8px;
 }
 
-/* Other input styles */
-.field input {
-	padding: 4px;
-	width: 100%;
+.stepper {
+	display: flex;
+	align-items: center;
+}
+
+ /* -------------------
+  * Toolbar
+  * -------------------
+  */
+#toolbar {
+	position: sticky;
+	bottom: 0;
+	left: calc((100% - 210mm) / 2);
+	max-width: 210mm;
+	display: block;
+	text-align: right;
 	box-sizing: border-box;
-	border: 1px solid var(--lightgray);
-	border-radius: 4px;
-	font-family: "Caveat", cursive;
-	font-size: 20px;
+	padding: 16px;
+	height: 80px;
 }
 
-.field.error input {
-	border: 1px solid var(--danger);
-	background-color: var(--danger-light);
-}
-
-.field.ok input {
-	border: 1px solid var(--success);
-	background-color: var(--success-light);
+@media screen and (max-width: 210mm) {
+	#toolbar {
+		margin-top: -80px;
+	}
 }
 
 
-/* Multicolumn styles */
-.cols-2 {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-column-gap: 1cm;
-	grid-row-gap: 1em;
-}
-
-/* Error messages */
-.error-message {
-	color: var(--danger);
-}
-
-/* Dialog styles */
+ /* -------------------
+  * Modals
+  * -------------------
+  */
 .modal {
 	position: fixed;
 	top: 0;
@@ -223,16 +260,128 @@ input[type=submit]:disabled, input[type=button]:disabled, button:disabled, .butt
 	background: var(--danger);
 }
 
-/* Accessible screen reader hiding for inputs */
+/* ====================
+ * FORM
+ * ====================
+ */
 
-.sr-hidden {
-	position: absolute !important;
-	width: 0 !important;
-	height: 0 !important;
-	overflow: hidden !important;
+ /* -------------------
+  * Fieldset
+  * -------------------
+  */
+fieldset {
+	border: none;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	padding: 0;
+	page-break-inside: avoid;
 }
 
-/* Printing page settings */
+legend {
+	color: var(--dark);
+	font-weight: bold;
+}
+
+ /* -------------------
+  * Form Inputs
+  * -------------------
+  */
+
+.field {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.field input {
+	padding: 4px;
+	width: 100%;
+	box-sizing: border-box;
+	border: 1px solid var(--lightgray);
+	border-radius: 4px;
+	font-family: "Caveat", cursive;
+	font-size: 20px;
+}
+
+.field.error input {
+	border: 1px solid var(--danger);
+	background-color: var(--danger-light);
+}
+
+.field.ok input {
+	border: 1px solid var(--success);
+	background-color: var(--success-light);
+}
+
+.field input[type=checkbox] {
+	width: auto;
+}
+
+.field .error-message {
+	color: var(--danger);
+}
+
+
+ /* -------------------
+  * Layouts
+  * -------------------
+  */
+.cols-2 {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 32px;
+}
+
+@media screen and (max-width: 210mm) {
+	.cols-2 {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* --------------------
+  * Form and Preview
+  * -------------------
+  */
+form, #preview {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 210mm;
+	min-height: 297mm;
+	margin: auto;
+	border: none;
+	display: block;
+}
+
+#preview .pagedjs_page {
+	background: white;
+	margin-top: 2cm;
+	margin-bottom: 2cm;
+}
+
+#preview .pagedjs_page:first-of-type {
+	margin-top: 0;
+}
+
+#preview .pagedjs_page:last-of-type {
+	margin-bottom: 0;
+}
+
+form {
+	background: var(--light);
+	padding: var(--margin);
+}
+
+.hidden {
+	display: none !important;
+}
+
+.only-print {
+	display: none !important;
+}
+
+/* --------------------
+  * Paged.js Rendering
+  * -------------------
+  */
 @page {
 	size: A4;
 	background: white;
@@ -247,98 +396,15 @@ input[type=submit]:disabled, input[type=button]:disabled, button:disabled, .butt
 	}
 }
 
-/* Only applied on the web */
-@media screen {
-	main {
-		background: var(--lightgray);
-		padding-top: 2cm;
-		padding-bottom: 2cm;
-	}
-
-	form, #preview {
-		box-sizing: border-box;
-		width: 100%;
-		max-width: 210mm;
-		min-height: 297mm;
-		margin: auto;
-		border: none;
-		display: block;
-	}
-
-	#preview {
-		overflow-x: hidden;
-	}
-
-	form {
-		background: var(--light);
-		padding: var(--margin);
-	}
-
-	.hidden {
-		display: none !important;
-	}
-
-	#toolbar {
-		position: sticky;
-		bottom: 0;
-		left: calc((100% - 210mm) / 2);
-		max-width: 210mm;
-		display: block;
-		text-align: right;
-		box-sizing: border-box;
-		padding: 16px;
-		height: 80px;
-	}
-
-	.only-print {
-		display: none !important;
-	}
-
-	/* Responsive design for mobile (smaller than A4 size) */
-	@media screen and (max-width: 210mm) {
-		main {
-			padding: 0;
-		}
-
-		form {
-			padding: 32px;
-			padding-bottom: 80px;
-			min-height: auto;
-		}
-
-		.cols-2 {
-			grid-template-columns: 1fr;
-		}
-
-		#toolbar {
-			margin-top: -80px;
-		}
-	}
-}
-
-/* Applied while printing */
 @media print {
-	body {
-		background-color: var(--lightgray);
+	#print input[type=submit],
+	#print input[type=button],
+	#print button,
+	#print .button {
+		display: none !important;
 	}
 
-	#preview {
-		display: none;
-	}
-	
-	header, nav, footer {
-		display: none;
-	}
-
-	form {
-		margin: 0;
-	}
-
-	input[type=submit], input[type=button], button {
-		display: none;
-	}
-
-	.field input {
+	#print .field input {
 		padding: 0;
 		margin: 0;
 		font-size: 20px;
@@ -347,29 +413,30 @@ input[type=submit]:disabled, input[type=button]:disabled, button:disabled, .butt
 		background: none !important;
 	}
 
-	input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {
+	#print input::-webkit-outer-spin-button,
+	#print input::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
 	}
 	
-	input[type=number] {
+	#print input[type=number] {
 		-moz-appearance: textfield;
 		appearance: textfield;
 	}
-	
-	.no-print {
-		display: none !important;
-	}
 
-	.error-message {
+	#print .error-message {
 		display: none;
 	}
 
-	#toolbar {
-		display: none;
+	#print .no-print {
+		display: none !important;
 	}
 
-	.ui {
-		display: none !important;
+	#print .only-print {
+		display: block !important;
+	}
+
+	#print .page.hidden {
+		display: block !important;
 	}
 }

@@ -31,5 +31,6 @@
   "date_time": "Date and Time",
   "date": "Date",
   "time": "Time",
-  "boolean": "Boolean"
+  "boolean": "Boolean",
+  "accept": "Accept"
 }

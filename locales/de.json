@@ -31,5 +31,6 @@
   "email": "E-Mail",
   "time": "Zeit",
   "date": "Datum",
-  "boolean": "Boolescher Wert"
+  "boolean": "Boolescher Wert",
+  "accept": "Akzeptieren"
 }
