@@ -57,13 +57,6 @@ main {
 	padding-bottom: 2cm;
 }
 
-@media screen and (max-width: 210mm) {
-	main {
-		padding-top: 0 !important;
-		padding-bottom: 0 !important;
-	}
-}
-
 header, footer {
 	background: var(--secondary);
 	color: var(--primary);
@@ -106,10 +99,10 @@ header {
  * This includes the header, footer, toolbar, the preview, overlay buttons etc.
  */
 
- /* -------------------
-  * Overlay Buttons
-  * -------------------
-  */
+/* --------------------
+ * Overlay Buttons
+ * --------------------
+ */
 input[type=submit],
 input[type=button],
 button,
@@ -178,10 +171,10 @@ button:disabled,
 	align-items: center;
 }
 
- /* -------------------
-  * Toolbar
-  * -------------------
-  */
+/* -------------------
+ * Toolbar
+ * -------------------
+ */
 #toolbar {
 	position: sticky;
 	bottom: 0;
@@ -194,17 +187,10 @@ button:disabled,
 	height: 80px;
 }
 
-@media screen and (max-width: 210mm) {
-	#toolbar {
-		margin-top: -80px;
-	}
-}
-
-
- /* -------------------
-  * Modals
-  * -------------------
-  */
+/* -------------------
+ * Modals
+ * -------------------
+ */
 .modal {
 	position: fixed;
 	top: 0;
@@ -265,10 +251,10 @@ button:disabled,
  * ====================
  */
 
- /* -------------------
-  * Fieldset
-  * -------------------
-  */
+/* -------------------
+ * Fieldset
+ * -------------------
+ */
 fieldset {
 	border: none;
 	margin-top: 1em;
@@ -277,16 +263,10 @@ fieldset {
 	page-break-inside: avoid;
 }
 
-legend {
-	color: var(--dark);
-	font-weight: bold;
-}
-
- /* -------------------
-  * Form Inputs
-  * -------------------
-  */
-
+/* -------------------
+ * Input Fields
+ * -------------------
+ */
 .field {
 	margin-top: 1em;
 	margin-bottom: 1em;
@@ -312,7 +292,8 @@ legend {
 	background-color: var(--success-light);
 }
 
-.field input[type=checkbox] {
+.field input[type=checkbox],
+.field input[type=radio] {
 	width: auto;
 }
 
@@ -321,24 +302,18 @@ legend {
 }
 
 
- /* -------------------
-  * Layouts
-  * -------------------
-  */
+/* -------------------
+ * Layouts
+ * -------------------
+ */
 .cols-2 {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-column-gap: 32px;
 }
 
-@media screen and (max-width: 210mm) {
-	.cols-2 {
-		grid-template-columns: 1fr;
-	}
-}
-
 /* --------------------
-  * Form and Preview
+  * Preview
   * -------------------
   */
 form, #preview {
@@ -370,6 +345,7 @@ form {
 	padding: var(--margin);
 }
 
+
 .hidden {
 	display: none !important;
 }
@@ -378,65 +354,25 @@ form {
 	display: none !important;
 }
 
-/* --------------------
-  * Paged.js Rendering
-  * -------------------
-  */
-@page {
-	size: A4;
-	background: white;
-	margin: var(--margin);
 
-	@bottom-left {
-		content: "Nova Forms";
+/* ====================
+ * Mobile Layout
+ * ====================
+ *
+ * Needs to be important, otherwise it won't apply when switching from preview back to edit mode.
+ */
+ @media only screen and (max-width: 210mm) {
+	main {
+		padding-top: 0 ;
+		padding-bottom: 0;
 	}
 
-	@bottom-right {
-		content: counter(page) "/" counter(pages);
-	}
-}
-
-@media print {
-	#print input[type=submit],
-	#print input[type=button],
-	#print button,
-	#print .button {
-		display: none !important;
+	form .cols-2 {
+		grid-template-columns: 1fr;
 	}
 
-	#print .field input {
-		padding: 0;
-		margin: 0;
-		font-size: 20px;
-		color: var(--dark);
-		border: none !important;
-		background: none !important;
-	}
-
-	#print input::-webkit-outer-spin-button,
-	#print input::-webkit-inner-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
-	}
-	
-	#print input[type=number] {
-		-moz-appearance: textfield;
-		appearance: textfield;
-	}
-
-	#print .error-message {
-		display: none;
-	}
-
-	#print .no-print {
-		display: none !important;
-	}
-
-	#print .only-print {
-		display: block !important;
-	}
-
-	#print .page.hidden {
-		display: block !important;
+	form {
+		padding: 16px ;
+		min-height: auto;
 	}
 }

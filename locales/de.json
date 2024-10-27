@@ -13,7 +13,6 @@
   "zip_code": "PLZ",
   "street": "Strasse",
   "child": "Kind {{num}}",
-  "children_information_message": "Fügen Sie hier die persönlichen Daten Ihrer Kinder hinzu. Mit den entsprechenden Schaltflächen können Sie ganz einfach Kinder hinzufügen und entfernen.",
   "repeatable_information_message": "Dies demonstriert die Fähigkeit, Komponenten dynamisch hinzuzufügen und zu entfernen oder über wiederholbare Komponenten zu verfügen",
   "uploading_files": "Hochladen von Dateien",
   "uploading_files_message": "Die Unterstützung für das Hochladen von Dateien kann einfach durch Einfügen der entsprechenden Komponente hinzugefügt werden. Das serverseitige Handling wird automatisch generiert.",
@@ -32,5 +31,18 @@
   "time": "Zeit",
   "date": "Datum",
   "boolean": "Boolescher Wert",
-  "accept": "Akzeptieren"
+  "accept": "Akzeptieren",
+  "number": "Nummer",
+  "radio": "Radio",
+  "radio_c": "Wert C",
+  "radio_b": "Wert B",
+  "radio_a": "Wert A",
+  "non_empty_string": "Nicht leerer Text",
+  "string": "Text",
+  "server_fn": "Serverfunktionen",
+  "welcome": "Willkommen",
+  "server_fn_message": "Das folgende Adressfeld unterstützt die automatische Vervollständigung durch den Aufruf einer Serverfunktion, die wiederum die Swiss Post API aufruft, um den Städtenamen nach Postleitzahl abzurufen.",
+  "file_upload": "Datei-Upload",
+  "repeatables": "Wiederholbare Elemente",
+  "address": "Adresse"
 }

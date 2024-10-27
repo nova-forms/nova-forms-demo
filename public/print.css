@@ -1,0 +1,56 @@
+@page {
+	size: A4;
+	background: white;
+	margin: var(--margin);
+
+	@bottom-left {
+		content: "Nova Forms";
+	}
+
+	@bottom-right {
+		content: counter(page) "/" counter(pages);
+	}
+}
+
+#print form {
+	padding: 0 !important;
+}
+
+#print input[type=submit],
+#print input[type=button],
+#print button,
+#print .button {
+	display: none !important;
+}
+
+#print .field input {
+	padding: 0;
+	margin: 0;
+	font-size: 20px;
+	color: var(--dark);
+	border: none !important;
+	background: none !important;
+	pointer-events: none;
+}
+
+#print input[type=number] {
+	-moz-appearance: textfield;
+	appearance: textfield;
+}
+
+#print .error-message {
+	display: none;
+}
+
+#print .no-print {
+	display: none !important;
+}
+
+#print .only-print {
+	display: block !important;
+}
+
+#print .page.hidden {
+	display: block !important;
+}
+

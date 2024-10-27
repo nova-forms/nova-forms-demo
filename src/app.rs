@@ -1,8 +1,11 @@
+use std::option;
+
 use leptos::*;
 use leptos_i18n::*;
 use leptos_meta::*;
 use nova_forms::*;
 use serde::{Deserialize, Serialize};
+use strum::{EnumIter, EnumString, IntoStaticStr};
 
 // This generates the `NovaFormContextProvider` component at compile-time to initialize all the necessary context.
 init_nova_forms!();
@@ -25,27 +28,39 @@ pub fn App() -> impl IntoView {
     }
 }
 
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, Eq, Hash, EnumIter, EnumString, IntoStaticStr, Default)]
+pub enum RadioValue {
+    #[default]
+    A,
+    B,
+    C,
+}
+
 // Define the form data structure.
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DemoForm {
+    datatypes: Datatypes,
     address: Address,
     #[serde(default)]
-    children: Vec<PersonData>,
+    children: Vec<ChildData>,
     #[serde(default)]
     files: Vec<FileId>,
-    datatypes: Datatypes,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct Datatypes {
+    string: String,
+    non_empty_string: NonEmptyString,
     email: Email,
     phone: Telephone,
+    number: u64,
     date: Date,
     time: Time,
     date_time: DateTime,
     #[serde(default)]
     bool: bool,
     accept: Accept,
+    radio: RadioValue,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -57,14 +72,14 @@ pub struct Address {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PersonData {
+pub struct ChildData {
     first_name: NonEmptyString,
     last_name: NonEmptyString,
 }
 
 // Defines how to render the form.
 #[component]
-pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
+pub fn DemoForm(#[prop(optional)] form_data: DemoForm, #[prop(optional)] render: bool) -> impl IntoView {
     // Get the locale context.
     let i18n = use_i18n();
     // Define the submit server action.
@@ -75,6 +90,12 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
     // Define custom error message translations.
     provide_translation_context(move |err| match err {
         NonEmptyStringError::EmptyString => t!(i18n, error_empty_string),
+    });
+
+    provide_translation_context(move |err| match err {
+        RadioValue::A => t!(i18n, radio_a).into_view(),
+        RadioValue::B => t!(i18n, radio_b).into_view(),
+        RadioValue::C => t!(i18n, radio_c).into_view(),
     });
 
     view! {
@@ -95,49 +116,50 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
             bind="form_data"
             bind_meta_data="meta_data"
             i18n=i18n
+            render=render
         >
 
             <Pages>
-                <Page id="first-page" label=t!(i18n, about_yourself)>
-                    <h1 class="font-semibold text-red-500">{t!(i18n, demo_form)}</h1>
+                <Page id="page-welcome" label=t!(i18n, welcome)>
+                    <h2>{t!(i18n, welcome)}</h2>
                     <p>{t!(i18n, welcome_message)}</p>
-                    <h2>{t!(i18n, about_yourself)}</h2>
-                    <p>{t!(i18n, about_yourself_message)}</p>
-                    <fieldset class="cols-2">
-                        <legend>{t!(i18n, about_yourself)}</legend>
-                        <Group bind="me">
-                            <Input<NonEmptyString> label=t!(i18n, first_name) bind="first_name" />
-                            <Input<NonEmptyString> label=t!(i18n, last_name) bind="last_name" />
+                </Page>
+
+                <Page id="page-datatypes" label=t!(i18n, datatypes)>
+                    <h2>{t!(i18n, datatypes)}</h2>
+                    <p>{t!(i18n, datatypes_message)}</p>
+                    <div class="cols-2">
+                        <Group bind="datatypes">
+                            <Input<String> bind="string" label=t!(i18n, string) />
+                            <Input<NonEmptyString> bind="non_empty_string" label=t!(i18n, non_empty_string) />
+                            <Input<Email> bind="email" label=t!(i18n, email) />
+                            <Input<Telephone> bind="phone" label=t!(i18n, telephone) />
+                            <Input<u64> bind="number" label=t!(i18n, number) />
+                            <Input<Time> bind="time" label=t!(i18n, time) />
+                            <Input<Date> bind="date" label=t!(i18n, date) />
+                            <Input<DateTime> bind="date_time" label=t!(i18n, date_time) />
+                            <Checkbox<bool> bind="bool" label=t!(i18n, boolean) />
+                            <Checkbox<Accept> bind="accept" label=t!(i18n, accept) />
+                            <Radio<RadioValue> bind="radio" label=t!(i18n, radio) />
                         </Group>
+                    </div>
+                </Page>
+
+                <Page id="page-server-fn" label=t!(i18n, server_fn)>
+                    <h2>{t!(i18n, server_fn)}</h2>
+                    <p>{t!(i18n, server_fn_message)}</p>
+                    <div class="cols-2">
                         <Group bind="address">
                             <Input<String> bind="street" label=t!(i18n, street) />
                             <Input<String> bind="house_number" label=t!(i18n, house_number) />
                             <Input<String> bind="zip" label=t!(i18n, zip_code) on:input=set_zip />
                             <Input<String> bind="city" label=t!(i18n, city) value=city />
                         </Group>
-                    </fieldset>
+                    </div>
                 </Page>
 
-                <Page id="second-page" label=t!(i18n, datatypes)>
-                    <h2>{t!(i18n, datatypes)}</h2>
-                    <p>{t!(i18n, datatypes_message)}</p>
-                    <fieldset class="cols-2">
-                        <legend>{t!(i18n, datatypes)}</legend>
-                        <Group bind="datatypes">
-                            <Input<Email> bind="email" label=t!(i18n, email) />
-                            <Input<Telephone> bind="phone" label=t!(i18n, telephone) />
-                            <Input<Date> bind="date" label=t!(i18n, date) />
-                            <Input<Time> bind="time" label=t!(i18n, time) />
-                            <Input<DateTime> bind="date_time" label=t!(i18n, date_time) />
-                            <Checkbox<bool> bind="bool" label=t!(i18n, boolean) />
-                            <Checkbox<Accept> bind="accept" label=t!(i18n, accept) />
-                        </Group>
-                    </fieldset>
-                </Page>
-
-                <Page id="third-page" label=t!(i18n, the_grand_finale)>
-                    <h2>{t!(i18n, your_children)}</h2>
-                    <p>{t!(i18n, children_information_message)}</p>
+                <Page id="page-repeatable" label=t!(i18n, repeatables)>
+                    <h2>{t!(i18n, repeatables)}</h2>
                     <p>{t!(i18n, repeatable_information_message)}</p>
                     <Repeatable bind="children" item = move |idx| view! {
                         <fieldset class="cols-2">
@@ -147,17 +169,22 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
                         </fieldset>
                     }>
                     </Repeatable>
+                </Page>
 
+                <Page id="page-file-upload" label=t!(i18n, file_upload)>
+                    <h2>{t!(i18n, file_upload)}</h2>
+                    <p>{t!(i18n, uploading_files_message)}</p>
+                    <FileUpload bind="files" />
+                </Page>
+
+
+                <Page id="page-finale" label=t!(i18n, the_grand_finale)>
                     <div class="no-print">
-                        <h2>{t!(i18n, uploading_files)}</h2>
-                        <p>{t!(i18n, uploading_files_message)}</p>
-                        <p>{t!(i18n, pdf_rendering_note)}</p>
-                        <FileUpload bind="files" />
                         <h2>{t!(i18n, the_grand_finale)}</h2>
                         <p>{t!(i18n, check_form_preview_message)}</p>
                         <p>{t!(i18n, submit_message)}</p>
+                        <p>{t!(i18n, pdf_rendering_note)}</p>
                     </div>
-
                     <h2 class="only-print">{t!(i18n, signatures)}</h2>
                 </Page>
             </Pages>
@@ -181,7 +208,7 @@ async fn on_submit(form_data: DemoForm, meta_data: MetaData) -> Result<(), Serve
         .render_form(move || {
             view! {
                 <NovaFormContextProvider meta_data=meta_data>
-                    <DemoForm form_data=form_data />
+                    <DemoForm form_data=form_data render=true />
                 </NovaFormContextProvider>
             }
         })

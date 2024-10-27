@@ -24,6 +24,7 @@ serde = { version = "1.0", features = ["derive"] }
 uuid  = { features = ["v4", "serde"], version = "1" }
 nova-forms = { path = "../nova-forms" }
 leptos_i18n = "0.4"
+strum = { version = "0.26", features = ["derive"] }
 
 [features]
 hydrate = [
@@ -66,7 +67,7 @@ site-root = "target/site"
 site-pkg-dir = "pkg"
 
 # [Optional] The source CSS file. If it ends with .sass or .scss then it will be compiled by dart-sass into CSS. The CSS is optimized by Lightning CSS before being written to <site-root>/<site-pkg>/app.css
-style-file = "style/main.css"
+style-file = "public/main.css"
 
 # The tailwind input file.
 #

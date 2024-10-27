@@ -13,7 +13,6 @@
   "zip_code": "ZIP Code",
   "city": "City",
   "child": "Child {{num}}",
-  "children_information_message": "Add the personal information of your children here. You can easily add and remove children with the respective buttons.",
   "repeatable_information_message": "This demonstrates the ability to dynamically add and remove components, or have repeatable components",
   "uploading_files": "Uploading Files",
   "uploading_files_message": "Support for file upload can be easily added by inserting the respective component. The server side handling is generated automatically.",
@@ -32,5 +31,18 @@
   "date": "Date",
   "time": "Time",
   "boolean": "Boolean",
-  "accept": "Accept"
+  "accept": "Accept",
+  "number": "Number",
+  "radio": "Radio",
+  "radio_a": "Value A",
+  "radio_b": "Value B",
+  "radio_c": "Value C",
+  "string": "String",
+  "non_empty_string": "Non Empty String",
+  "address": "Address",
+  "server_fn": "Server Functions",
+  "welcome": "Welcome",
+  "server_fn_message": "The address field below supports autocompletion by calling a server function, that again cals the Swiss Post API to fetch the city name by ZIP Code.",
+  "file_upload": "File Upload",
+  "repeatables": "Repeatable Elements"
 }
