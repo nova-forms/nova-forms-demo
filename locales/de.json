@@ -24,7 +24,7 @@
   "error_empty_string": "Dieses Feld darf nicht leer sein.",
   "error_invalid_format": "Es wurde ein ungültiges Format angegeben.",
   "datatypes": "Datentypen",
-  "datatypes_message": "Die folgenden weiteren Datentypen werden bisher mit vollständiger Validierung unterstützt.",
+  "datatypes_message": "Die folgenden Datentypen werden bisher mit vollständiger Validierung unterstützt.",
   "telephone": "Telefon",
   "date_time": "Datum und Uhrzeit",
   "email": "E-Mail",
@@ -48,5 +48,11 @@
   "select": "Wählen",
   "submit_error": "Fehler",
   "submit_pending": "Ihr Formular wird übermittelt.",
-  "submit_success": "Ihr Formular wurde erfolgreich übermittelt."
+  "submit_success": "Ihr Formular wurde erfolgreich übermittelt.",
+  "edit": "Bearbeiten",
+  "submit": "Einreichen",
+  "preview": "Vorschau",
+  "language": "Sprache",
+  "menu": "Speisekarte",
+  "csr_only_messge": "Bitte beachten Sie, dass dieses Formular derzeit nur im clientseitigen Modus ausgeführt wird. \nDas bedeutet, dass bestimmte Funktionen wie das Hochladen von Dateien, das Vorausfüllen und das Absenden von Formularen deaktiviert sind. \nSie können dieses Formular im Vollmodus ausführen, indem Sie das Repository herunterladen und lokal auf Ihrem Computer hosten."
 }

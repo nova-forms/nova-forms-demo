@@ -24,7 +24,7 @@
   "error_empty_string": "This field cannot be empty.",
   "error_invalid_format": "An invalid format was provided.",
   "datatypes": "Datatypes",
-  "datatypes_message": "The following further datatypes are supported so far, with full validation.",
+  "datatypes_message": "The following datatypes are supported so far, with full validation.",
   "email": "Email",
   "telephone": "Telephone",
   "date_time": "Date and Time",
@@ -48,5 +48,11 @@
   "select": "Select",
   "submit_error": "Your form could not be submitted, please try again later.",
   "submit_pending": "Your form is being submitted.",
-  "submit_success": "Your form was successfully submitted."
+  "submit_success": "Your form was successfully submitted.",
+  "edit": "Edit",
+  "submit": "Submit",
+  "preview": "Preview",
+  "language": "Language",
+  "menu": "Menu",
+  "csr_only_messge": "Please note that this form currently runs in client-side only mode. This means that certain features such as file upload, prefilling and form submission are disabled. You can run this form in full mode by downloading the repository and hosting it locally on your computer."
 }

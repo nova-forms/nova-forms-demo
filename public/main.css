@@ -56,6 +56,8 @@
 	--field-border: 1px solid var(--text);
 	--field-border-ok: 1px solid var(--success);
 	--field-border-error: 1px solid var(--danger);
+	--field-focus-outline: 1px solid var(--primary);
+	--field-focus-shadow: none;
 }
 
 /* Ajila Style */
@@ -116,6 +118,7 @@
 	--field-border: none;
 	--field-border-ok: none;
 	--field-border-error: none;
+	--field-focus-outline: 2px solid var(--primary);
 }
 
 body {
@@ -215,9 +218,9 @@ input[type=button],
 button,
 .button {
 	border: none;
-	background: var(--primary);
+	background: var(--field-background);
 	padding: var(--field-padding);
-	color: var(--secondary);
+	color: var(--text);
 	margin: 4px;
 	border-radius: var(--field-border-radius);
 	cursor: pointer;
@@ -228,15 +231,29 @@ button,
 input[type=submit]:hover,
 input[type=button]:hover,
 button:hover,
-.button:hover {
+.button:hover,
+.button:has(input:hover),
+.button:has(select:hover) {
 }
 
 input[type=submit]:disabled,
 input[type=button]:disabled,
 button:disabled,
-.button:disabled {
+.button:disabled,
+.button:has(input:disabled),
+.button:has(select:disabled) {
 	cursor: not-allowed;
 	background: var(--disabled);
+}
+
+input[type=submit]:focus,
+input[type=button]:focus,
+button:focus,
+.button:focus,
+.button:has(input:focus),
+.button:has(select:focus) {
+	outline: var(--field-focus-outline);
+	box-shadow: var(--field-focus-shadow);
 }
 
 .icon-button, .icon-select {
@@ -259,8 +276,10 @@ button:disabled,
 	margin: 0;
 	border: none;
 	background: none;
-	color: var(--secondary);
 	font-weight: bold;
+	outline: none;
+	color: var(--text);
+	background: var(--field-background);
 }
 
 .icon-select select:focus {
@@ -405,6 +424,13 @@ fieldset {
 	font-size: var(--input-font-size);
 }
 
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+	outline: var(--field-focus-outline);
+	box-shadow: var(--field-focus-shadow);
+}
+
 .field.error input,
 .field.error select,
 .field.error textarea {
@@ -439,6 +465,12 @@ fieldset {
 	padding: 0 !important;
 	margin: 0 !important;
 	overflow: hidden !important;
+	border: none !important;
+}
+
+.field.checkbox input[type=checkbox]:focus,
+.field.radio input[type=radio]:focus {
+	outline: none;
 }
 
 .field.checkbox label,
@@ -460,25 +492,23 @@ fieldset {
 	cursor: pointer;
 }
 
-.field.radio .custom-radio {
+.field.radio .custom-radio,
+.field.radio .custom-radio::after {
 	border-radius: 50%;
 }
 
-.field.radio input:checked ~ .custom-radio::after {
-	content: "";
-	position: absolute;
-	top: 25%;
-	left: 25%;
-	width: 50%;
-	height: 50%;
-	background: var(--text);
-	border-radius: 50%;
+.field.checkbox .custom-checkbox,
+.field.checkbox .custom-checkbox::after {
+	border-radius: 20%;
 }
 
-.field.checkbox .custom-checkbox {
-	border-radius: 2px;
+.field.radio input:focus ~ .custom-radio,
+.field.checkbox input:focus ~ .custom-checkbox {
+	outline: var(--field-focus-outline);
+	box-shadow: var(--field-focus-shadow);
 }
 
+.field.radio input:checked ~ .custom-radio::after,
 .field.checkbox input:checked ~ .custom-checkbox::after {
 	content: "";
 	position: absolute;
@@ -487,10 +517,7 @@ fieldset {
 	width: 50%;
 	height: 50%;
 	background: var(--text);
-	border-radius: 1px;
 }
-
-
 
 
 /* -------------------

@@ -2175,6 +2175,8 @@ dependencies = [
 [[package]]
 name = "nova-forms"
 version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1b6c1c36240f754782a91da421aecb94bcaee76b74c810caa665c862c9377c8c"
 dependencies = [
  "codee",
  "futures",

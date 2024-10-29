@@ -104,6 +104,14 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm, #[prop(optional)] render:
         SubmitState::Success => t_string!(i18n, submit_success),
     });
 
+    provide_translation(move |toolbar| match toolbar {
+        Translation::Edit => t_string!(i18n, edit),
+        Translation::Submit => t_string!(i18n, submit),
+        Translation::Preview => t_string!(i18n, preview),
+        Translation::Language => t_string!(i18n, language),
+        Translation::Menu => t_string!(i18n, menu),
+    });
+
     view! {
         // Injects a stylesheet into the document <head>.
         // id=leptos means cargo-leptos will hot-reload this stylesheet.
@@ -129,6 +137,15 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm, #[prop(optional)] render:
                 <Page id="page-welcome" label=t!(i18n, welcome)>
                     <h2>{t!(i18n, welcome)}</h2>
                     <p>{t!(i18n, welcome_message)}</p>
+                    {
+                        if cfg!(feature = "csr") {
+                            view! {
+                                <p>{t!(i18n, csr_only_messge)}</p>
+                            }.into_view()
+                        } else {
+                            View::default()
+                        }
+                    }
                 </Page>
 
                 <Page id="page-datatypes" label=t!(i18n, datatypes)>
