@@ -1,6 +1,7 @@
 @page {
 	size: A4;
 	background: white;
+	color: black;
 	margin: var(--margin);
 
 	@bottom-left {
@@ -16,6 +17,12 @@
 	padding: 0 !important;
 }
 
+#print input,
+#print select,
+#print textarea {
+	color: black;
+}
+
 #print input[type=submit],
 #print input[type=button],
 #print button,
@@ -23,19 +30,14 @@
 	display: none !important;
 }
 
-#print .field input {
+#print .field input,
+#print .field select,
+#print .field textarea {
 	padding: 0;
 	margin: 0;
-	font-size: 20px;
-	color: var(--dark);
 	border: none !important;
 	background: none !important;
 	pointer-events: none;
-}
-
-#print input[type=number] {
-	-moz-appearance: textfield;
-	appearance: textfield;
 }
 
 #print .error-message {

@@ -23,7 +23,7 @@ http = "1"
 serde = { version = "1.0", features = ["derive"] }
 uuid  = { features = ["v4", "serde"], version = "1" }
 nova-forms = { path = "../nova-forms" }
-leptos_i18n = "0.4"
+leptos_i18n = { version = "0.4.2", features = ["interpolate_display", "track_locale_files"] }
 strum = { version = "0.26", features = ["derive"] }
 
 [features]
@@ -57,7 +57,7 @@ panic = "abort"
 
 [package.metadata.leptos]
 # The name used by wasm-bindgen/cargo-leptos for the JS/WASM bundle. Defaults to the crate name
-output-name = "nova-forms-demo"
+output-name = "app"
 
 # The site root folder is where cargo-leptos generate all output. WARNING: all content of this folder will be erased on a rebuild. Use it in your server setup.
 site-root = "target/site"

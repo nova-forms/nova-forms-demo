@@ -1809,9 +1809,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_i18n"
-version = "0.4.1"
+version = "0.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d3be2077a3f3aaa79641b7b405153d2b65e2bbbd261d7e4f5f9bd2bb21abeaef"
+checksum = "eae340ebc4f67110eda8ad934f5173f54c274481857f66730d1e9a4cfaa3ec4f"
 dependencies = [
  "codee",
  "fixed_decimal",
@@ -1829,9 +1829,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_i18n_macro"
-version = "0.4.1"
+version = "0.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e1a39b3d86025b049c24e85d9554b109bef721ccb2f3acffe85fdc7e2d7e53b2"
+checksum = "720af3b1921be2339f5413a70b5db79b6b9cb90b695bc9ad3f971520bb363c69"
 dependencies = [
  "fixed_decimal",
  "icu",

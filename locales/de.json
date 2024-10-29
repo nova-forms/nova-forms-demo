@@ -44,5 +44,9 @@
   "server_fn_message": "Das folgende Adressfeld unterstützt die automatische Vervollständigung durch den Aufruf einer Serverfunktion, die wiederum die Swiss Post API aufruft, um den Städtenamen nach Postleitzahl abzurufen.",
   "file_upload": "Datei-Upload",
   "repeatables": "Wiederholbare Elemente",
-  "address": "Adresse"
+  "address": "Adresse",
+  "select": "Wählen",
+  "submit_error": "Fehler",
+  "submit_pending": "Ihr Formular wird übermittelt.",
+  "submit_success": "Ihr Formular wurde erfolgreich übermittelt."
 }

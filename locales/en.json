@@ -44,5 +44,9 @@
   "welcome": "Welcome",
   "server_fn_message": "The address field below supports autocompletion by calling a server function, that again cals the Swiss Post API to fetch the city name by ZIP Code.",
   "file_upload": "File Upload",
-  "repeatables": "Repeatable Elements"
+  "repeatables": "Repeatable Elements",
+  "select": "Select",
+  "submit_error": "Your form could not be submitted, please try again later.",
+  "submit_pending": "Your form is being submitted.",
+  "submit_success": "Your form was successfully submitted."
 }

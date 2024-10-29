@@ -1,22 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
-:root {
-	--base: #454545;
-	--primary: #dc9e26;
-	--secondary: #062544;
-	--danger: #c2185b;
-	--danger-light: #ecb9cd;
-	--warning: #dc9e26;
-	--warning-light: #e4e1bd;
-	--success: #3dcc79;
-	--success-light: #c4efd6;
-	--gray: #7e7e7e;
-	--lightgray: #e7e7e7;
-	--light: #fff;
-	--dark: #000;
-
-	--margin: 2cm;
-}
+/*@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');*/
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* ====================
  * GENERAL
@@ -25,10 +8,136 @@
  * General styles that apply to the whole document.
  */
 
+/* --------------------
+ * Variables
+ * --------------------
+ *
+ * To get a nice style, it should suffice to simply change the following variables.
+ */
+
+/* Default values */
+:root {
+	/* Color Pallette */
+	--primary: white;
+	--secondary: black;
+	--danger: red;
+	--warning: orange;
+	--success: green;
+	--info: blue;
+	--text: black;
+	--disabled: gray;
+	--background: white;
+	--wrapper-background: lightgray;
+
+	/* General Settings */
+	--general-padding: 16px;
+	--general-line-height: 1.5;
+
+	/* Fonts */
+	--text-font: sans-serif;
+	--heading-font: var(--text-font);
+	--input-font: var(--text-font);
+	--text-font-size: 16px;
+	--input-font-size: var(--text-font-size);
+
+	/* Page Settings */
+	--page-margin: 2cm;
+	--page-layout: A4;
+	--page-width: 210mm;
+	--page-height: 297mm;
+	
+	/* Field Settings */
+	--field-padding: 8px;
+	--field-border-radius: var(--field-padding);
+
+	--field-background: none;
+	--field-background-ok: none;
+	--field-background-error: none;
+	--field-border: 1px solid var(--text);
+	--field-border-ok: 1px solid var(--success);
+	--field-border-error: 1px solid var(--danger);
+}
+
+/* Ajila Style */
+/*
+:root {
+	--base: #454545;
+	--gray: #7e7e7e;
+	--lightgray: #e7e7e7;
+	--light: #fff;
+	--dark: #000;
+
+	--primary: #dc9e26;
+	--secondary: #062544;
+	--danger: #c2185b;
+	--warning: #dc9e26;
+	--success: #3dcc79;
+	--info: var(--secondary);
+	--text: var(--dark);
+	--disabled: var(--lightgray);
+	--background: var(--light);
+	--wrapper-background: var(--lightgray);
+
+	--text-font: "Montserrat", sans-serif;
+}
+*/
+
+/* Nova Forms */
+:root {
+	--spaceblue: #00202e;
+	--oceanblue: #003f5c;
+	--rainblue: #2c4875;
+	--royalpurple: #8a508f;
+	--velvetpurple: #bc5090;
+	--salmonpink: #ff6361;
+	--peachorange: #ff8531;
+	--honeyyelloy: #ffa600;
+	--starlightyellow: #ffd380;
+	--forestgreen: #007872;
+	--grassgreen: #35a77a;
+	
+	--primary: var(--starlightyellow);
+	--secondary: var(--spaceblue);
+	--danger: var(--salmonpink);
+	--warning: var(--peachorange);
+	--success: var(--grassgreen);
+	--info: var(--rainblue);
+	--text: white;
+	--disabled: lightgray;
+	--background: var(--spaceblue);
+	--wrapper-background: var(--spaceblue);
+
+	--text-font: "Urbanist", sans-serif;
+	--text-font-size: 18px;
+
+	--field-background: var(--rainblue);
+	--field-background-ok: var(--rainblue);
+	--field-background-error: var(--salmonpink);
+	--field-border: none;
+	--field-border-ok: none;
+	--field-border-error: none;
+}
+
 body {
-	font-family: "Montserrat", sans-serif;
+	font-family: var(--text-font);
 	background: var(--secondary);
+	color: var(--text);
 	margin: 0;
+	font-size: var(--text-font-size);
+}
+
+.content {
+	margin: auto;
+	max-width: var(--page-width);
+	padding: var(--general-padding);
+}
+
+h1, h2, h3, h4, h5, h6, #title {
+	font-family: var(--heading-font);
+}
+
+p {
+	line-height: var(--general-line-height);
 }
 
 /* Google icons */
@@ -46,51 +155,6 @@ body {
 	overflow: hidden !important;
 }
 
-/* --------------------
- * Nova Forms Wrapper
- * --------------------
- */
-
-main {
-	background: var(--lightgray);
-	padding-top: 2cm;
-	padding-bottom: 2cm;
-}
-
-header, footer {
-	background: var(--secondary);
-	color: var(--primary);
-}
-
-footer {
-	padding: 16px;
-	text-align: center;
-}
-
-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 16px;
-	position: sticky;
-	top: 0;
-	z-index: 1000;
-}
-
-#logo {
-	height: 48px;
-	margin-right: 16px;
-}
-
-#name {
-	text-align: right;
-}
-
-#title {
-	font-weight: bold;
-	font-size: 24px;
-}
-
 /* ====================
  * OVERLAY
  * ====================
@@ -100,22 +164,63 @@ header {
  */
 
 /* --------------------
+ * Nova Forms Wrapper
+ * --------------------
+ * 
+ * The main container for the whole application.
+ */
+main {
+	background: var(--wrapper-background);
+	padding-top: var(--general-padding);
+	padding-bottom: var(--general-padding);
+}
+
+header, footer {
+	background: var(--secondary);
+	color: var(--primary);
+}
+
+footer > .content {
+	text-align: center;
+}
+
+header > .content {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+}
+
+#logo {
+	height: 48px;
+	margin-right: var(--general-padding);
+}
+ 
+#title {
+	font-weight: bold;
+	font-size: 24px;
+}
+
+
+/* --------------------
  * Overlay Buttons
  * --------------------
+ * 
+ * Buttons that are not rendered in the printed form.
  */
 input[type=submit],
 input[type=button],
 button,
 .button {
 	border: none;
-	background-color: var(--primary);
-	padding: 8px;
-	color: var(--light);
+	background: var(--primary);
+	padding: var(--field-padding);
+	color: var(--secondary);
 	margin: 4px;
-	border-radius: 16px;
+	border-radius: var(--field-border-radius);
 	cursor: pointer;
-	box-shadow: 0 -2px 0 rgba(0, 0, 0, 0.2) inset;
-	font-size: 12px;
 	display: inline-block;
 	box-sizing: border-box;
 }
@@ -124,15 +229,14 @@ input[type=submit]:hover,
 input[type=button]:hover,
 button:hover,
 .button:hover {
-	box-shadow: 0 0 0;
 }
 
 input[type=submit]:disabled,
 input[type=button]:disabled,
 button:disabled,
 .button:disabled {
-	background-color: var(--lightgray);
 	cursor: not-allowed;
+	background: var(--disabled);
 }
 
 .icon-button, .icon-select {
@@ -155,7 +259,7 @@ button:disabled,
 	margin: 0;
 	border: none;
 	background: none;
-	color: var(--light);
+	color: var(--secondary);
 	font-weight: bold;
 }
 
@@ -169,22 +273,29 @@ button:disabled,
 .stepper {
 	display: flex;
 	align-items: center;
+	justify-content: center;
+}
+
+.stepper .stepper-spacer {
+	flex-grow: 1;
+	flex-shrink: 1;
 }
 
 /* -------------------
  * Toolbar
  * -------------------
+ * 
+ * The Nova Forms Toolbar
  */
 #toolbar {
 	position: sticky;
 	bottom: 0;
-	left: calc((100% - 210mm) / 2);
-	max-width: 210mm;
 	display: block;
 	text-align: right;
 	box-sizing: border-box;
-	padding: 16px;
-	height: 80px;
+	padding-top: 16px;
+	padding-bottom: 16px;
+	background: var(--background);
 }
 
 /* -------------------
@@ -195,6 +306,7 @@ button:disabled,
 	position: fixed;
 	top: 0;
 	left: 0;
+	z-index: 10000;
 	width: 100vw;
 	height: 100vh;
 	display: flex;
@@ -211,27 +323,31 @@ button:disabled,
 	padding: 0;
 	width: 100%;
 	max-width: 256px;
+	background: var(--background);
+	color: var(--text);
+	border-radius: var(--field-border-radius);
 }
 
 .modal .modal-header {
 	font-weight: bold;
-	color: var(--dark);
 	background: none;
-	padding: 16px;
+	padding: var(--general-padding);
+	border-top-left-radius: var(--field-border-radius);
+	border-top-right-radius: var(--field-border-radius);
 }
 
 .modal .modal-main {
-	background: var(--light);
-	padding: 16px;
+	padding: var(--general-padding);
 }
 
 .modal .modal-footer {
-	background: var(--light);
-	padding: 16px;
+	padding: var(--general-padding);
+	border-bottom-left-radius: var(--field-border-radius);
+	border-bottom-right-radius: var(--field-border-radius);
 }
 
 .modal dialog.info {
-	background: var(--primary);
+	background: var(--info);
 }
 
 .modal dialog.success {
@@ -249,10 +365,13 @@ button:disabled,
 /* ====================
  * FORM
  * ====================
+ *
+ * Everything that is part of the form
+ * and will be rendered in the printed document.
  */
 
 /* -------------------
- * Fieldset
+ * Fieldsets
  * -------------------
  */
 fieldset {
@@ -272,35 +391,116 @@ fieldset {
 	margin-bottom: 1em;
 }
 
-.field input {
-	padding: 4px;
+.field input,
+.field select,
+.field textarea {
+	padding: var(--field-padding);
+	border-radius: var(--field-border-radius);
 	width: 100%;
 	box-sizing: border-box;
-	border: 1px solid var(--lightgray);
-	border-radius: 4px;
-	font-family: "Caveat", cursive;
-	font-size: 20px;
+	border: var(--field-border);
+	background: var(--field-background);
+	font-family: var(--input-font);
+	color: var(--text);
+	font-size: var(--input-font-size);
 }
 
-.field.error input {
-	border: 1px solid var(--danger);
-	background-color: var(--danger-light);
+.field.error input,
+.field.error select,
+.field.error textarea {
+	border: var(--field-border-error);
+	background: var(--field-background-error);
 }
 
-.field.ok input {
-	border: 1px solid var(--success);
-	background-color: var(--success-light);
-}
-
-.field input[type=checkbox],
-.field input[type=radio] {
-	width: auto;
+.field.ok input,
+.field.ok select,
+.field.ok textarea {
+	border: var(--field-border-ok);
+	background: var(--field-background-ok);
 }
 
 .field .error-message {
 	color: var(--danger);
 }
 
+/* -------------------
+ * Checkboxes and Radio
+ * -------------------
+ */
+.field.checkbox input[type=checkbox],
+.field.radio input[type=radio] {
+	width: auto;
+	margin-right: 8px;
+
+	/* Custom */
+	position: absolute !important;
+	width: 0 !important;
+	height: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	overflow: hidden !important;
+}
+
+.field.checkbox label,
+.field.radio label {
+	display: inline-flex;
+	align-items: center;
+	width: 100%;
+}
+
+/* Custom */
+.field.checkbox .custom-checkbox,
+.field.radio .custom-radio {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	margin-right: 8px;
+	background: var(--field-background);
+	position: relative;
+	cursor: pointer;
+}
+
+.field.radio .custom-radio {
+	border-radius: 50%;
+}
+
+.field.radio input:checked ~ .custom-radio::after {
+	content: "";
+	position: absolute;
+	top: 25%;
+	left: 25%;
+	width: 50%;
+	height: 50%;
+	background: var(--text);
+	border-radius: 50%;
+}
+
+.field.checkbox .custom-checkbox {
+	border-radius: 2px;
+}
+
+.field.checkbox input:checked ~ .custom-checkbox::after {
+	content: "";
+	position: absolute;
+	top: 25%;
+	left: 25%;
+	width: 50%;
+	height: 50%;
+	background: var(--text);
+	border-radius: 1px;
+}
+
+
+
+
+/* -------------------
+ * Layouts
+ * -------------------
+ */
+.repeatable {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
 
 /* -------------------
  * Layouts
@@ -309,7 +509,7 @@ fieldset {
 .cols-2 {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	grid-column-gap: 32px;
+	grid-column-gap: calc(var(--general-padding) * 2);
 }
 
 /* --------------------
@@ -319,17 +519,14 @@ fieldset {
 form, #preview {
 	box-sizing: border-box;
 	width: 100%;
-	max-width: 210mm;
-	min-height: 297mm;
-	margin: auto;
 	border: none;
 	display: block;
 }
 
 #preview .pagedjs_page {
 	background: white;
-	margin-top: 2cm;
-	margin-bottom: 2cm;
+	margin-top: var(--general-padding);
+	margin-bottom: var(--general-padding);
 }
 
 #preview .pagedjs_page:first-of-type {
@@ -341,10 +538,8 @@ form, #preview {
 }
 
 form {
-	background: var(--light);
-	padding: var(--margin);
+	background: var(--background);
 }
-
 
 .hidden {
 	display: none !important;
@@ -371,8 +566,11 @@ form {
 		grid-template-columns: 1fr;
 	}
 
-	form {
-		padding: 16px ;
-		min-height: auto;
+	#toolbar {
+		right: 0;
+	}
+
+	.stepper .stepper-page-number {
+		display: none;
 	}
 }

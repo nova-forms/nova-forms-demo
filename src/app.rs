@@ -1,11 +1,9 @@
-use std::option;
-
 use leptos::*;
 use leptos_i18n::*;
 use leptos_meta::*;
 use nova_forms::*;
 use serde::{Deserialize, Serialize};
-use strum::{EnumIter, EnumString, IntoStaticStr};
+use strum::{Display, EnumIter, EnumString, IntoStaticStr};
 
 // This generates the `NovaFormContextProvider` component at compile-time to initialize all the necessary context.
 init_nova_forms!();
@@ -19,7 +17,7 @@ pub fn App() -> impl IntoView {
             let i18n = use_i18n();
             
             view! {
-                <NovaFormWrapper title=t!(i18n, nova_forms) subtitle=t!(i18n, demo_form) logo="/logo.png">
+                <NovaFormWrapper title=t!(i18n, nova_forms) subtitle=t!(i18n, demo_form) logo="/logo.svg">
                     <DemoForm />
                 </NovaFormWrapper>  
             }
@@ -28,7 +26,7 @@ pub fn App() -> impl IntoView {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, Eq, Hash, EnumIter, EnumString, IntoStaticStr, Default)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, Eq, Hash, EnumIter, EnumString, Display, IntoStaticStr, Default)]
 pub enum RadioValue {
     #[default]
     A,
@@ -61,6 +59,7 @@ pub struct Datatypes {
     bool: bool,
     accept: Accept,
     radio: RadioValue,
+    select: RadioValue,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -88,20 +87,27 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm, #[prop(optional)] render:
     let (set_zip, city) = use_zip_service();
 
     // Define custom error message translations.
-    provide_translation_context(move |err| match err {
-        NonEmptyStringError::EmptyString => t!(i18n, error_empty_string),
+    provide_translation(move |err| match err {
+        NonEmptyStringError::EmptyString => t_string!(i18n, error_empty_string),
     });
 
-    provide_translation_context(move |err| match err {
-        RadioValue::A => t!(i18n, radio_a).into_view(),
-        RadioValue::B => t!(i18n, radio_b).into_view(),
-        RadioValue::C => t!(i18n, radio_c).into_view(),
+    provide_translation(move |err| match err {
+        RadioValue::A => t_string!(i18n, radio_a),
+        RadioValue::B => t_string!(i18n, radio_b),
+        RadioValue::C => t_string!(i18n, radio_c),
+    });
+
+    provide_translation(move |err| match err {
+        SubmitState::Initial => "".into(),
+        SubmitState::Error(_) => t_string!(i18n, submit_error),
+        SubmitState::Pending => t_string!(i18n, submit_pending),
+        SubmitState::Success => t_string!(i18n, submit_success),
     });
 
     view! {
         // Injects a stylesheet into the document <head>.
         // id=leptos means cargo-leptos will hot-reload this stylesheet.
-        <Stylesheet id="leptos" href="/pkg/nova-forms-demo.css" />
+        <Stylesheet id="leptos" href="/pkg/app.css" />
         <Link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0"
@@ -141,6 +147,7 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm, #[prop(optional)] render:
                             <Checkbox<bool> bind="bool" label=t!(i18n, boolean) />
                             <Checkbox<Accept> bind="accept" label=t!(i18n, accept) />
                             <Radio<RadioValue> bind="radio" label=t!(i18n, radio) />
+                            <Select<RadioValue> bind="select" label=t!(i18n, select) />
                         </Group>
                     </div>
                 </Page>
