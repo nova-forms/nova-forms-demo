@@ -12,17 +12,19 @@ init_nova_forms!();
 #[component]
 pub fn App() -> impl IntoView {
     view! {
-        <NovaFormContextProvider>
+        <NovaFormsContextProvider 
+            base_url=if cfg!(feature = "csr") { "/nova-forms-demo" } else { "/" }
+        >
         {
             let i18n = use_i18n();
             
             view! {
-                <NovaFormWrapper title=t!(i18n, nova_forms) subtitle=t!(i18n, demo_form) logo="/logo.svg">
+                <NovaFormWrapper title=t!(i18n, nova_forms) subtitle=t!(i18n, demo_form) logo="logo.svg">
                     <DemoForm />
                 </NovaFormWrapper>  
             }
         }
-        </NovaFormContextProvider>
+        </NovaFormsContextProvider>
     }
 }
 
@@ -113,13 +115,6 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm, #[prop(optional)] render:
     });
 
     view! {
-        // Injects a stylesheet into the document <head>.
-        // id=leptos means cargo-leptos will hot-reload this stylesheet.
-        <Stylesheet id="leptos" href="/pkg/app.css" />
-        <Link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0"
-        />
         // Sets the document title.
         <Title text=t!(i18n, demo_form) />
 
@@ -222,7 +217,7 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm, #[prop(optional)] render:
 // Defines the server action for form submission.
 #[server]
 async fn on_submit(form_data: DemoForm, meta_data: MetaData) -> Result<(), ServerFnError> {
-    use crate::app::NovaFormContextProvider;
+    use crate::app::NovaFormsContextProvider;
 
     println!("form data received: {:#?}", form_data);
     println!("meta data received: {:#?}", meta_data);
@@ -231,9 +226,9 @@ async fn on_submit(form_data: DemoForm, meta_data: MetaData) -> Result<(), Serve
     let output_path = pdf_gen
         .render_form(move || {
             view! {
-                <NovaFormContextProvider meta_data=meta_data>
+                <NovaFormsContextProvider meta_data=meta_data>
                     <DemoForm form_data=form_data render=true />
-                </NovaFormContextProvider>
+                </NovaFormsContextProvider>
             }
         })
         .await?;

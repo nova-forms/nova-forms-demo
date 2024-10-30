@@ -22,7 +22,7 @@ tracing = { version = "0.1", optional = true }
 http = "1"
 serde = { version = "1.0", features = ["derive"] }
 uuid  = { features = ["v4", "serde"], version = "1" }
-nova-forms = { version = "0.1" }
+nova-forms = { version = "0.1.1" }
 leptos_i18n = { version = "0.4.2", features = ["interpolate_display", "track_locale_files"] }
 strum = { version = "0.26", features = ["derive"] }
 
@@ -74,7 +74,7 @@ site-root = "target/site"
 site-pkg-dir = "pkg"
 
 # [Optional] The source CSS file. If it ends with .sass or .scss then it will be compiled by dart-sass into CSS. The CSS is optimized by Lightning CSS before being written to <site-root>/<site-pkg>/app.css
-style-file = "public/main.css"
+style-file = "style/main.css"
 
 # The tailwind input file.
 #
@@ -136,9 +136,12 @@ lib-default-features = false
 # Optional. Defaults to "release".
 lib-profile-release = "wasm-release"
 
-# Track the locales directory
+# Track directories for hot-reloading
 watch-additional-files = ["locales", "public"]
 
 [package.metadata.leptos-i18n]
 default = "en"
 locales = ["en", "de"]
+
+[package.metadata.nova-forms]
+print-css = "print.css"

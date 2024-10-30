@@ -15,6 +15,12 @@
 
 #print form {
 	padding: 0 !important;
+	background: white;
+	color: black;
+}
+
+#print #toolbar {
+	display: none;
 }
 
 #print input,
