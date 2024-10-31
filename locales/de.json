@@ -54,5 +54,7 @@
   "preview": "Vorschau",
   "language": "Sprache",
   "menu": "Speisekarte",
-  "csr_only_messge": "Bitte beachten Sie, dass dieses Formular derzeit nur im clientseitigen Modus ausgeführt wird. \nDas bedeutet, dass bestimmte Funktionen wie das Hochladen von Dateien, das Vorausfüllen und das Absenden von Formularen deaktiviert sind. \nSie können dieses Formular im Vollmodus ausführen, indem Sie das Repository herunterladen und lokal auf Ihrem Computer hosten."
+  "csr_only_messge": "Bitte beachten Sie, dass dieses Formular derzeit nur im clientseitigen Modus ausgeführt wird. \nDas bedeutet, dass bestimmte Funktionen wie das Hochladen von Dateien, das Vorausfüllen und das Absenden von Formularen deaktiviert sind. \nSie können dieses Formular im Vollmodus ausführen, indem Sie das Repository herunterladen und lokal auf Ihrem Computer hosten.",
+  "csr_only": "Clientseitiger Modus",
+  "error_not_accepted": "Bitte akzeptieren Sie dieses Feld."
 }

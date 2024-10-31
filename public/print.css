@@ -62,3 +62,8 @@
 	display: block !important;
 }
 
+
+#print .dialog,
+#print .modal {
+	display: none;
+}

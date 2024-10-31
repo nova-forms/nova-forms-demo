@@ -335,49 +335,64 @@ button:focus,
 	backdrop-filter: blur(8px);
 }
 
-.modal dialog {
+.modal dialog,
+.dialog dialog {
 	border: none;
 	margin: auto;
 	position: static;
 	padding: 0;
 	width: 100%;
-	max-width: 256px;
 	background: var(--background);
 	color: var(--text);
 	border-radius: var(--field-border-radius);
+	padding: var(--general-padding);
+	box-sizing: border-box;
 }
 
-.modal .modal-header {
+.modal dialog {
+	max-width: 256px;
+}
+
+.modal .modal-header,
+.dialog .dialog-header {
 	font-weight: bold;
 	background: none;
-	padding: var(--general-padding);
 	border-top-left-radius: var(--field-border-radius);
 	border-top-right-radius: var(--field-border-radius);
 }
 
-.modal .modal-main {
-	padding: var(--general-padding);
+.modal .modal-main,
+.dialog .dialog-main {
 }
 
-.modal .modal-footer {
-	padding: var(--general-padding);
+.modal .modal-footer,
+.dialog .dialog-footer {
 	border-bottom-left-radius: var(--field-border-radius);
 	border-bottom-right-radius: var(--field-border-radius);
 }
 
-.modal dialog.info {
+.dialog {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.modal dialog.info,
+.dialog dialog.info {
 	background: var(--info);
 }
 
-.modal dialog.success {
+.modal dialog.success,
+.dialog dialog.success {
 	background: var(--success);
 }
 
-.modal dialog.warn {
+.modal dialog.warn,
+.dialog dialog.warn {
 	background: var(--warning);
 }
 
-.modal dialog.error {
+.modal dialog.error,
+.dialog dialog.error {
 	background: var(--danger);
 }
 

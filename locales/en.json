@@ -54,5 +54,7 @@
   "preview": "Preview",
   "language": "Language",
   "menu": "Menu",
-  "csr_only_messge": "Please note that this form currently runs in client-side only mode. This means that certain features such as file upload, prefilling and form submission are disabled. You can run this form in full mode by downloading the repository and hosting it locally on your computer."
+  "csr_only_messge": "Please note that this form currently runs in client-side only mode. This means that certain features such as file upload, prefilling and form submission are disabled. You can run this form in full mode by downloading the repository and hosting it locally on your computer.",
+  "csr_only": "Client-Side Only Mode",
+  "error_not_accepted": "Please accept this field."
 }
