@@ -90,28 +90,28 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm, #[prop(optional)] render:
 
     // Define custom error message translations.
     provide_translation(move |err| match err {
-        NonEmptyStringError::EmptyString => t_string!(i18n, error_empty_string),
+        NonEmptyStringError::EmptyString => t!(i18n, error_empty_string).into(),
     });
 
     provide_translation(move |err| match err {
-        RadioValue::A => t_string!(i18n, radio_a),
-        RadioValue::B => t_string!(i18n, radio_b),
-        RadioValue::C => t_string!(i18n, radio_c),
+        RadioValue::A => t!(i18n, radio_a).into(),
+        RadioValue::B => t!(i18n, radio_b).into(),
+        RadioValue::C => t!(i18n, radio_c).into(),
     });
 
     provide_translation(move |err| match err {
         SubmitState::Initial => "".into(),
-        SubmitState::Error(_) => t_string!(i18n, submit_error),
-        SubmitState::Pending => t_string!(i18n, submit_pending),
-        SubmitState::Success => t_string!(i18n, submit_success),
+        SubmitState::Error(_) => t!(i18n, submit_error).into(),
+        SubmitState::Pending => t!(i18n, submit_pending).into(),
+        SubmitState::Success => t!(i18n, submit_success).into(),
     });
 
     provide_translation(move |toolbar| match toolbar {
-        Translation::Edit => t_string!(i18n, edit),
-        Translation::Submit => t_string!(i18n, submit),
-        Translation::Preview => t_string!(i18n, preview),
-        Translation::Language => t_string!(i18n, language),
-        Translation::Menu => t_string!(i18n, menu),
+        Translation::Edit => t!(i18n, edit).into(),
+        Translation::Submit => t!(i18n, submit).into(),
+        Translation::Preview => t!(i18n, preview).into(),
+        Translation::Language => t!(i18n, language).into(),
+        Translation::Menu => t!(i18n, menu).into(),
     });
 
     view! {
