@@ -74,20 +74,18 @@ pub struct Datatypes {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct Address {
     street: String,
-    house_number: String,
     zip: String,
     city: String,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ChildData {
-    first_name: NonEmptyString,
-    last_name: NonEmptyString,
+    name: NonEmptyString,
 }
 
 // Defines how to render the form.
 #[component]
-pub fn DemoForm(#[prop(optional)] form_data: DemoForm, #[prop(optional)] render: bool) -> impl IntoView {
+pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
     // Get the locale context.
     let i18n = use_i18n();
     // Define the submit server action.
@@ -139,7 +137,6 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm, #[prop(optional)] render:
             bind="form_data"
             bind_meta_data="meta_data"
             i18n=i18n
-            render=render
         >
 
             <Pages>
@@ -164,7 +161,7 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm, #[prop(optional)] render:
                 <Page id="page-datatypes" label=t!(i18n, datatypes)>
                     <h2>{t!(i18n, datatypes)}</h2>
                     <p>{t!(i18n, datatypes_message)}</p>
-                    <div class="cols-2">
+                    <Cols>
                         <Group bind="datatypes">
                             <Input<String> bind="string" label=t!(i18n, string) />
                             <Input<NonEmptyString> bind="non_empty_string" label=t!(i18n, non_empty_string) />
@@ -179,31 +176,27 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm, #[prop(optional)] render:
                             <Radio<RadioValue> bind="radio" label=t!(i18n, radio) />
                             <Select<RadioValue> bind="select" label=t!(i18n, select) />
                         </Group>
-                    </div>
+                    </Cols>
                 </Page>
 
                 <Page id="page-server-fn" label=t!(i18n, server_fn)>
                     <h2>{t!(i18n, server_fn)}</h2>
                     <p>{t!(i18n, server_fn_message)}</p>
-                    <div class="cols-2">
+                    <Cols>
                         <Group bind="address">
-                            <Input<String> bind="street" label=t!(i18n, street) />
-                            <Input<String> bind="house_number" label=t!(i18n, house_number) />
+                            <Colspan><Input<String> bind="street" label=t!(i18n, street) /></Colspan>
                             <Input<String> bind="zip" label=t!(i18n, zip_code) on:input=set_zip />
                             <Input<String> bind="city" label=t!(i18n, city) value=city />
                         </Group>
-                    </div>
+                    </Cols>
                 </Page>
 
                 <Page id="page-repeatable" label=t!(i18n, repeatables)>
                     <h2>{t!(i18n, repeatables)}</h2>
                     <p>{t!(i18n, repeatable_information_message)}</p>
                     <Repeatable bind="children" item = move |idx| view! {
-                        <fieldset class="cols-2">
-                            <legend>{t!(i18n, child, num = move || idx + 1)}</legend>
-                            <Input<NonEmptyString> label=t!(i18n, first_name) bind="first_name" />
-                            <Input<NonEmptyString> label=t!(i18n, last_name) bind="last_name" />
-                        </fieldset>
+                        <h3>{t!(i18n, child, num = move || idx + 1)}</h3>
+                        <Input<NonEmptyString> label=t!(i18n, first_name) bind="name" />
                     }>
                     </Repeatable>
                 </Page>
@@ -216,13 +209,15 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm, #[prop(optional)] render:
 
 
                 <Page id="page-finale" label=t!(i18n, the_grand_finale)>
-                    <div class="no-print">
+                    <ScreenOnly>
                         <h2>{t!(i18n, the_grand_finale)}</h2>
                         <p>{t!(i18n, check_form_preview_message)}</p>
                         <p>{t!(i18n, submit_message)}</p>
                         <p>{t!(i18n, pdf_rendering_note)}</p>
-                    </div>
-                    <h2 class="only-print">{t!(i18n, signatures)}</h2>
+                    </ScreenOnly>
+                    <PrintOnly>
+                        <h2>{t!(i18n, signatures)}</h2>
+                    </PrintOnly>
                 </Page>
             </Pages>
 
@@ -245,7 +240,7 @@ async fn on_submit(form_data: DemoForm, meta_data: MetaData) -> Result<(), Serve
         .render_form(move || {
             view! {
                 <NovaFormsContextProvider meta_data=meta_data>
-                    <DemoForm form_data=form_data render=true />
+                    <DemoForm form_data=form_data />
                 </NovaFormsContextProvider>
             }
         })
