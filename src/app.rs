@@ -8,6 +8,9 @@ use serde::{Deserialize, Serialize};
 use strum::{Display, EnumIter, EnumString, IntoStaticStr};
 
 // This generates the `NovaFormContextProvider` component at compile-time to initialize all the necessary context.
+#[cfg(feature = "csr")]
+init_nova_forms!("/nova-forms-demo");
+#[cfg(not(feature = "csr"))]
 init_nova_forms!();
 
 // Define the app that contains the form.
@@ -16,9 +19,9 @@ pub fn App() -> impl IntoView {
     view! {
         // We differentiate the base URL between CSR only mode and normal mode for this form.
         // This is only necessary for the demo, in a real application you would only use one mode.
-        <NovaFormsContextProvider base_url=if cfg!(feature = "csr") { "/nova-forms-demo" } else { "/" }>
+        <BaseContextProvider>
             <Wrapper />
-        </NovaFormsContextProvider>
+        </BaseContextProvider>
     }
 }
 
@@ -85,7 +88,7 @@ pub struct ChildData {
 
 // Defines how to render the form.
 #[component]
-pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
+pub fn DemoForm() -> impl IntoView {
     // Get the locale context.
     let i18n = use_i18n();
     // Define the submit server action.
@@ -132,7 +135,6 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
 
         // Defines how to render the form itself.
         <NovaForm
-            form_data=form_data
             on_submit=submit_action
             bind="form_data"
             bind_meta_data="meta_data"
@@ -230,19 +232,15 @@ pub fn DemoForm(#[prop(optional)] form_data: DemoForm) -> impl IntoView {
 // Defines the server action for form submission.
 #[server]
 async fn on_submit(form_data: DemoForm, meta_data: MetaData) -> Result<(), ServerFnError> {
-    use crate::app::NovaFormsContextProvider;
-
     println!("form data received: {:#?}", form_data);
     println!("meta data received: {:#?}", meta_data);
 
     let pdf_gen = expect_context::<PdfGen>();
     let output_path = pdf_gen
-        .render_form(move || {
-            view! {
-                <NovaFormsContextProvider meta_data=meta_data>
-                    <DemoForm form_data=form_data />
-                </NovaFormsContextProvider>
-            }
+        .render_form(move || view! {
+            <RenderContextProvider form_data=form_data meta_data=meta_data>
+                <DemoForm />
+            </RenderContextProvider>
         })
         .await?;
 

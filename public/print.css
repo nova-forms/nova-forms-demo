@@ -50,11 +50,11 @@
 	display: none;
 }
 
-#print .no-print {
+#print .screen-only {
 	display: none !important;
 }
 
-#print .only-print {
+#print .print-only {
 	display: block !important;
 }
 

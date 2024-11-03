@@ -16,7 +16,7 @@ async fn main() {
     let leptos_options = conf.leptos_options;
     let addr = leptos_options.site_addr;
     let routes = generate_route_list(App);
-    let pdf_gen = nova_forms::PdfGen::new();
+    let pdf_gen = nova_forms::PdfGen::new().await;
     let file_store = nova_forms::FileStore::new().await.unwrap();
 
     // build our application with a route

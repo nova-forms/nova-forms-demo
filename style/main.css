@@ -163,8 +163,9 @@ body {
 
 .content {
 	margin: auto;
+	padding-left: var(--general-padding);
+	padding-right: var(--general-padding);
 	max-width: var(--page-width);
-	padding: var(--general-padding);
 }
 
 h1, h2, h3, h4, h5, h6, #title {
@@ -213,13 +214,13 @@ p {
  */
 main {
 	background: var(--wrapper-background);
-	padding-top: var(--general-padding);
-	padding-bottom: var(--general-padding);
 }
 
 header, footer {
 	background: var(--secondary);
 	color: var(--primary);
+	padding-top: var(--general-padding);
+	padding-bottom: var(--general-padding);
 }
 
 footer > .content {
@@ -342,10 +343,19 @@ button:disabled,
 	padding-left: 8px;
 }
 
+/* -------------------
+ * Stepper
+ * -------------------
+ * 
+ * The Stepper
+ */
 .stepper {
+	position: sticky;
+	bottom: 0;
+}
+
+.stepper .button-group {
 	display: flex;
-	align-items: center;
-	justify-content: center;
 }
 
 .stepper .stepper-spacer {
@@ -712,16 +722,12 @@ form {
  */
  @media only screen and (max-width: 210mm) {
 	main {
-		padding-top: 0 ;
+		padding-top: 0;
 		padding-bottom: 0;
 	}
 
 	form .cols > * {
 		grid-column: 1 / -1 !important;
-	}
-
-	#toolbar {
-		right: 0;
 	}
 
 	.stepper .stepper-page-number {
