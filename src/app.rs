@@ -7,7 +7,7 @@ use nova_forms::*;
 use serde::{Deserialize, Serialize};
 use strum::{Display, EnumIter, EnumString, IntoStaticStr};
 
-// This generates the `NovaFormContextProvider` component at compile-time to initialize all the necessary context.
+// This generates the `BaseContextProvider` as well as the `RenderContextProvider` component at compile-time to initialize all the necessary context.
 #[cfg(feature = "csr")]
 init_nova_forms!("/nova-forms-demo");
 #[cfg(not(feature = "csr"))]
@@ -95,6 +95,12 @@ pub fn DemoForm() -> impl IntoView {
     let submit_action = create_server_action::<OnSubmit>();
     // Use the zip service to resolve city names.
     let (set_zip, city) = use_zip_service();
+    let (set_show_msg, show_msg) = use_unop(|value| value);
+    let (set_email1, set_email2, emails_not_equal) = use_binop(move |email1, email2| if email1 != email2 {
+        Some(t!(i18n, error_emails_not_equal).into())
+    } else {
+        None
+    });
 
     // Define custom error message translations.
     provide_translation(move |err| match err {
@@ -162,6 +168,7 @@ pub fn DemoForm() -> impl IntoView {
 
                 <Page id="page-datatypes" label=t!(i18n, datatypes)>
                     <h2>{t!(i18n, datatypes)}</h2>
+                    <p>{t!(i18n, field_message)}</p>
                     <p>{t!(i18n, datatypes_message)}</p>
                     <Cols>
                         <Group bind="datatypes">
@@ -181,13 +188,40 @@ pub fn DemoForm() -> impl IntoView {
                     </Cols>
                 </Page>
 
+                <Page id="page-dynamic-dialog" label=t!(i18n, dynamic_dialog)>
+                <h2>{t!(i18n, dynamic_dialog)}</h2>
+                <p>{t!(i18n, dynamic_dialog_message)}</p>
+                <Checkbox<bool> bind="show_dialog" label=t!(i18n, boolean) sync=set_show_msg />
+                <Dialog
+                    kind=DialogKind::Warn
+                    msg={t!(i18n, lorem_ipsum)}
+                    title={t!(i18n, dynamic_dialog)}
+                    open=show_msg />
+                <Cols>
+                    <Input<Email> bind="email" label=t!(i18n, email) sync=set_email1 />
+                    <Input<Email> bind="repeat_email" label=t!(i18n, email) sync=set_email2 error=emails_not_equal />
+                </Cols>
+            </Page>
+
                 <Page id="page-server-fn" label=t!(i18n, server_fn)>
                     <h2>{t!(i18n, server_fn)}</h2>
                     <p>{t!(i18n, server_fn_message)}</p>
+                    {
+                        if cfg!(feature = "csr") {
+                            view! {
+                                <Dialog
+                                    kind=DialogKind::Info
+                                    msg={t!(i18n, csr_only_messge)}
+                                    title={t!(i18n, csr_only)} />
+                            }.into_view()
+                        } else {
+                            View::default()
+                        }
+                    }
                     <Cols>
                         <Group bind="address">
                             <Colspan><Input<String> bind="street" label=t!(i18n, street) /></Colspan>
-                            <Input<String> bind="zip" label=t!(i18n, zip_code) on:input=set_zip />
+                            <Input<String> bind="zip" label=t!(i18n, zip_code) sync=set_zip />
                             <Input<String> bind="city" label=t!(i18n, city) value=city />
                         </Group>
                     </Cols>
@@ -206,6 +240,18 @@ pub fn DemoForm() -> impl IntoView {
                 <Page id="page-file-upload" label=t!(i18n, file_upload)>
                     <h2>{t!(i18n, file_upload)}</h2>
                     <p>{t!(i18n, uploading_files_message)}</p>
+                    {
+                        if cfg!(feature = "csr") {
+                            view! {
+                                <Dialog
+                                    kind=DialogKind::Info
+                                    msg={t!(i18n, csr_only_messge)}
+                                    title={t!(i18n, csr_only)} />
+                            }.into_view()
+                        } else {
+                            View::default()
+                        }
+                    }
                     <FileUpload bind="files" />
                 </Page>
 

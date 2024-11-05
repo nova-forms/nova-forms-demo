@@ -56,5 +56,10 @@
   "menu": "Speisekarte",
   "csr_only_messge": "Bitte beachten Sie, dass dieses Formular derzeit nur im clientseitigen Modus ausgeführt wird. \nDas bedeutet, dass bestimmte Funktionen wie das Hochladen von Dateien, das Vorausfüllen und das Absenden von Formularen deaktiviert sind. \nSie können dieses Formular im Vollmodus ausführen, indem Sie das Repository herunterladen und lokal auf Ihrem Computer hosten.",
   "csr_only": "Clientseitiger Modus",
-  "error_not_accepted": "Bitte akzeptieren Sie dieses Feld."
+  "error_not_accepted": "Bitte akzeptieren Sie dieses Feld.",
+  "dynamic_dialog_message": "Hier zeigen wir, dass auch Interaktionen zwischen Komponenten möglich sind.",
+  "dynamic_dialog": "Dynamische Komponenten",
+  "error_emails_not_equal": "Die bereitgestellten E-Mails sind nicht identisch.",
+  "lorem_ipsum": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+  "field_message": "Jedes Eingabefeld ist direkt einem Typ zugeordnet. \nJe nach Typ ändern sich der Eingabefeldtyp und die Validierung."
 }

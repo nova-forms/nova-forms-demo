@@ -56,5 +56,10 @@
   "menu": "Menu",
   "csr_only_messge": "Please note that this form currently runs in client-side only mode. This means that certain features such as file upload, prefilling and form submission are disabled. You can run this form in full mode by downloading the repository and hosting it locally on your computer.",
   "csr_only": "Client-Side Only Mode",
-  "error_not_accepted": "Please accept this field."
+  "error_not_accepted": "Please accept this field.",
+  "dynamic_dialog_message": "Here we show that it's also possible to have interactions between compontents.",
+  "dynamic_dialog": "Dynamic Components",
+  "error_emails_not_equal": "The provided emails are not the same.",
+  "lorem_ipsum": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+  "field_message": "Each input field directly maps to a type. Depending on the type, the input field type and validation changes."
 }
