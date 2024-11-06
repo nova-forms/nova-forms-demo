@@ -272,6 +272,15 @@ pub fn DemoForm() -> impl IntoView {
             <PageStepper />
 
         </NovaForm>
+
+        <Preview/>
+
+        <Toolbar>
+            <ToolbarPageSelect />
+            <ToolbarLocaleSelect i18n=i18n />
+            <ToolbarPreviewButton />
+            <ToolbarSubmitButton />
+        </Toolbar>
     }
 }
 
