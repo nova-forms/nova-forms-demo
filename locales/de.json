@@ -12,7 +12,7 @@
   "house_number": "Hausnummer",
   "zip_code": "PLZ",
   "street": "Adresse",
-  "child": "Name des  {{num}}. Kindes",
+  "child": "{{count}}. Kind",
   "repeatable_information_message": "Dies demonstriert die Fähigkeit, Komponenten dynamisch hinzuzufügen und zu entfernen oder über wiederholbare Komponenten zu verfügen",
   "uploading_files": "Hochladen von Dateien",
   "uploading_files_message": "Die Unterstützung für das Hochladen von Dateien kann einfach durch Einfügen der entsprechenden Komponente hinzugefügt werden. Das serverseitige Handling wird automatisch generiert.",
