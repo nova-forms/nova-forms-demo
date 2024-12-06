@@ -129,7 +129,7 @@ pub fn DemoForm() -> impl IntoView {
                         open=show_msg />
                     <Cols>
                         <Input<Email> bind="email" label=t!(i18n, email) change=on_ok(set(email1)) />
-                        <Input<Email> bind="repeat_email" label=t!(i18n, email) change=on_ok(set(email2)) error=error_emails_not_equal />
+                        <ScreenOnly><Input<Email> bind="repeat_email" label=t!(i18n, email) change=on_ok(set(email2)) error=error_emails_not_equal /></ScreenOnly>
                     </Cols>
                 </Page>
 
@@ -150,7 +150,7 @@ pub fn DemoForm() -> impl IntoView {
                     <h2>{t!(i18n, repeatables)}</h2>
                     <p>{t!(i18n, repeatable_information_message)}</p>
                     <Repeatable bind="children" item = move |idx| view! {
-                        <h3>{t!(i18n, child, num = move || idx + 1)}</h3>
+                        <h3>{t!(i18n, child, count = move || idx + 1)}</h3>
                         <Input<NonEmptyString> label=t!(i18n, first_name) bind="name" />
                     }>
                     </Repeatable>
