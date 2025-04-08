@@ -1980,12 +1980,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "levenshtein"
-version = "1.0.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "db13adb97ab515a3691f56e4dbab09283d0b86cb45abd991d8634a9d6f501760"
-
-[[package]]
 name = "libc"
 version = "0.2.161"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2029,15 +2023,6 @@ name = "litemap"
 version = "0.7.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "643cb0b8d4fcc284004d5fd0d67ccf61dfffadb7f75e1e71bc420f4688a3a704"
-
-[[package]]
-name = "litrs"
-version = "0.4.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b4ce301924b7887e9d637144fdade93f9dfff9b60981d4ac161db09720d39aa5"
-dependencies = [
- "proc-macro2",
-]
 
 [[package]]
 name = "lock_api"
@@ -2218,8 +2203,7 @@ dependencies = [
  "serde_qs 0.13.0",
  "server_fn",
  "sqlx",
- "strum 0.26.3 (git+https://github.com/Peternator7/strum)",
- "stylers",
+ "strum",
  "thiserror",
  "time",
  "tokio",
@@ -2242,7 +2226,7 @@ dependencies = [
  "leptos_router",
  "nova-forms",
  "serde",
- "strum 0.26.3 (registry+https://github.com/rust-lang/crates.io-index)",
+ "strum",
  "thiserror",
  "tokio",
  "tower 0.4.13",
@@ -3490,56 +3474,24 @@ checksum = "7da8b5736845d9f2fcb837ea5d9e2628564b3b043a70948a3f0b778838c5fb4f"
 
 [[package]]
 name = "strum"
-version = "0.26.3"
+version = "0.27.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8fec0f0aef304996cf250b31b5a10dee7980c85da9d759361292b8bca5a18f06"
+checksum = "f64def088c51c9510a8579e3c5d67c65349dcf755e5479ad3d010aa6454e2c32"
 dependencies = [
- "strum_macros 0.26.4 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "strum"
-version = "0.26.3"
-source = "git+https://github.com/Peternator7/strum#b023d234dd5113ed82654ee472794ba60af46ff7"
-dependencies = [
- "strum_macros 0.26.4 (git+https://github.com/Peternator7/strum)",
+ "strum_macros",
 ]
 
 [[package]]
 name = "strum_macros"
-version = "0.26.4"
+version = "0.27.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4c6bee85a5a24955dc440386795aa378cd9cf82acd5f764469152d2270e581be"
+checksum = "c77a8c5abcaf0f9ce05d62342b7d298c346515365c36b673df4ebe3ced01fde8"
 dependencies = [
  "heck",
  "proc-macro2",
  "quote",
  "rustversion",
  "syn 2.0.86",
-]
-
-[[package]]
-name = "strum_macros"
-version = "0.26.4"
-source = "git+https://github.com/Peternator7/strum#b023d234dd5113ed82654ee472794ba60af46ff7"
-dependencies = [
- "heck",
- "proc-macro2",
- "quote",
- "rustversion",
- "syn 2.0.86",
-]
-
-[[package]]
-name = "stylers"
-version = "0.3.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "03e306edf4b3cb5cff4b2e21b8895ed9e70fbd1bbb3a8dfb7e4cc245a763a955"
-dependencies = [
- "levenshtein",
- "litrs",
- "proc-macro2",
- "quote",
 ]
 
 [[package]]

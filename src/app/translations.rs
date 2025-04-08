@@ -12,10 +12,10 @@ pub fn provide_translations() {
         NonEmptyStringError::EmptyString => t!(i18n, error_empty_string).into(),
     });
     provide_translation(move |err| match err {
-        EmailError::InvalidFormat => t!(i18n, error_invalid_format).into(),
+        PhoneError::InvalidFormat(_) => t!(i18n, error_invalid_format).into(),
     });
     provide_translation(move |err| match err {
-        TelephoneError::InvalidFormat => t!(i18n, error_invalid_format).into(),
+        PhoneError::InvalidFormat(_) => t!(i18n, error_invalid_format).into(),
     });
     provide_translation(move |err| match err {
         AcceptError::NotAccepted => t!(i18n, error_not_accepted).into(),

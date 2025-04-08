@@ -13,28 +13,22 @@
 	--starlightyellow: #ffd380;
 	--forestgreen: #007872;
 	--grassgreen: #35a77a;
-	
-	--primary: var(--starlightyellow);
-	--secondary: var(--spaceblue);
-	--danger: var(--salmonpink);
+
+	--info: var(--starlightyellow);
+	--error: var(--salmonpink);
 	--warning: var(--peachorange);
 	--success: var(--grassgreen);
-	--info: var(--rainblue);
-	--text: white;
-	--disabled: lightgray;
-	--background: var(--spaceblue);
-	--header-background: var(--background);
-    --preview-background: var(--background);
+
+	--text: var(--spaceblue);
+
+	--button-background: var(--starlightyellow);
+	--dialog-info-text-color: white;
+	--field-outline-focus: 1px solid var(--spaceblue);
 
 	--text-font: "Urbanist", sans-serif;
 	--text-font-size: 18px;
 
-	--field-background: var(--rainblue);
-	--field-background-ok: var(--rainblue);
-	--field-background-error: var(--salmonpink);
-	--field-border: none;
-	--field-border-ok: none;
-	--field-border-error: none;
-	--field-outline-focus: 1px solid var(--honeyyelloy);
-	--field-outline-hover: 1px solid var(--primary);
+	--header-text-color: var(--starlightyellow);
+	--header-background: var(--spaceblue);
+	--header-border: none;
 }

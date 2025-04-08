@@ -22,10 +22,11 @@ tracing = { version = "0.1", optional = true }
 http = "1"
 serde = { version = "1.0", features = ["derive"] }
 uuid  = { features = ["v4", "serde"], version = "1" }
-# nova-forms = { version = "0.1.9" }
+# nova-forms = { version = "0.1.9" }
 nova-forms = { path = "../nova-forms" }
 leptos_i18n = { version = "0.4.2", features = ["interpolate_display", "track_locale_files"] }
-strum = { version = "0.26", features = ["derive"] }
+strum = { version = "0.27", features = ["derive"] }
+# strum = { git = "https://github.com/Peternator7/strum", features = ["derive"] }
 
 [features]
 hydrate = [
@@ -143,6 +144,3 @@ watch-additional-files = ["locales", "public"]
 [package.metadata.leptos-i18n]
 default = "en"
 locales = ["en", "de"]
-
-[package.metadata.nova-forms]
-print-css = "print.css"
