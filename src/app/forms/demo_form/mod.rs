@@ -51,28 +51,6 @@ pub fn DemoForm() -> impl IntoView {
                             <Select<RadioValue> bind="select" label=t!(i18n, select) />
                         </Group>
                     </Cols>
-                    <div>
-                        <Dialog
-                            kind=DialogKind::Info
-                            msg="Non nostrud non nostrud eiusmod elit. Culpa veniam aliquip deserunt enim Lorem. Cillum esse Lorem laborum nulla anim mollit irure esse laboris tempor. Veniam in dolore non excepteur elit pariatur nostrud enim. Qui sunt mollit ut eu velit esse dolor do sunt consequat qui. Cillum amet enim incididunt cupidatat elit."
-                            title="Lorem Ipsum"
-                            open=true />
-                        <Dialog
-                            kind=DialogKind::Success
-                            msg="Non nostrud non nostrud eiusmod elit. Culpa veniam aliquip deserunt enim Lorem. Cillum esse Lorem laborum nulla anim mollit irure esse laboris tempor. Veniam in dolore non excepteur elit pariatur nostrud enim. Qui sunt mollit ut eu velit esse dolor do sunt consequat qui. Cillum amet enim incididunt cupidatat elit."
-                            title="Lorem Ipsum"
-                            open=true />
-                        <Dialog
-                            kind=DialogKind::Warn
-                            msg="Non nostrud non nostrud eiusmod elit. Culpa veniam aliquip deserunt enim Lorem. Cillum esse Lorem laborum nulla anim mollit irure esse laboris tempor. Veniam in dolore non excepteur elit pariatur nostrud enim. Qui sunt mollit ut eu velit esse dolor do sunt consequat qui. Cillum amet enim incididunt cupidatat elit."
-                            title="Lorem Ipsum"
-                            open=true />
-                        <Dialog
-                            kind=DialogKind::Error
-                            msg="Non nostrud non nostrud eiusmod elit. Culpa veniam aliquip deserunt enim Lorem. Cillum esse Lorem laborum nulla anim mollit irure esse laboris tempor. Veniam in dolore non excepteur elit pariatur nostrud enim. Qui sunt mollit ut eu velit esse dolor do sunt consequat qui. Cillum amet enim incididunt cupidatat elit."
-                            title="Lorem Ipsum"
-                            open=true />
-                    </div>
                 </Page>
 
                 <Page id="page-dynamic-dialog" label=t!(i18n, dynamic_dialog)>

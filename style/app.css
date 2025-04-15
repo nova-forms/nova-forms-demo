@@ -21,9 +21,10 @@
 
 	--text: var(--spaceblue);
 
-	--button-background: var(--starlightyellow);
-	--dialog-info-text-color: white;
 	--field-outline-focus: 1px solid var(--spaceblue);
+
+	--button-background: var(--spaceblue);
+	--button-text-color: white;
 
 	--text-font: "Urbanist", sans-serif;
 	--text-font-size: 18px;
